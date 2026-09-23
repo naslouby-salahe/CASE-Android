@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as software."
+title: "CASE-Android: Context-Aware Scoping of Recorded Android Behavioral-Security Evidence Across OS Versions"
+type: software
+authors:
+  - given-names: Salaheddine
+    family-names: Naslouby
+    email: naslouby.salahe@gmail.com
+repository-code: "https://github.com/naslouby-salahe/CASE-Android"
+date-released: 2026-09-23
