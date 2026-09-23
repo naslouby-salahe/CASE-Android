@@ -1,0 +1,767 @@
+{
+  "input": "/home/naslouby/Projects/datp-shared-data/raw/SELENE",
+  "boolean_indicators": [
+    "has_NETWORK_EXTERNAL",
+    "has_NETWORK_LOCAL",
+    "has_BINDER_IPC",
+    "has_TLS_CERT_ACTIVITY",
+    "has_APP_PRIVATE_FILE_ACTIVITY",
+    "has_PROC_ACCESS",
+    "has_MEMORY_EXEC",
+    "has_ENV_CHECK",
+    "has_PROCESS_ACTIVITY",
+    "has_PROCESS_MEMORY_READ",
+    "has_WAIT_ACTIVITY",
+    "has_ERROR_PROBING",
+    "has_tcp_443",
+    "has_external_tcp",
+    "has_app_private_db",
+    "has_rwx_anon",
+    "has_process_vm_readv",
+    "has_app_private_db_high_volume",
+    "has_error_probing_high_volume"
+  ],
+  "dataset_audit": {
+    "run_feature_rows": {
+      "android10": 44485,
+      "android14": 30751
+    },
+    "unique_hashes": {
+      "android10": 44485,
+      "android14": 30751,
+      "shared": 30746,
+      "android10_only": 13739,
+      "android14_only": 5
+    },
+    "package_groups": {
+      "android10": 32222,
+      "android14": 22479,
+      "paired_android10": 22475,
+      "android10_only": 11181
+    },
+    "android10_paired_minus_unpaired_indicator_prevalence": {
+      "macro_absolute_difference": 0.03199696974168289,
+      "max_absolute_difference": 0.0871576216402653,
+      "per_indicator": {
+        "has_NETWORK_EXTERNAL": 0.0783134257120367,
+        "has_NETWORK_LOCAL": -0.0022559244180735405,
+        "has_BINDER_IPC": -0.015178080383799974,
+        "has_TLS_CERT_ACTIVITY": 0.06046840275245574,
+        "has_APP_PRIVATE_FILE_ACTIVITY": 0.031352367631200195,
+        "has_PROC_ACCESS": 0.0009332054799561229,
+        "has_MEMORY_EXEC": 0.017787916193051534,
+        "has_ENV_CHECK": -0.0034244079769708557,
+        "has_PROCESS_ACTIVITY": 0.008550274694602344,
+        "has_PROCESS_MEMORY_READ": 0.006143994928413443,
+        "has_WAIT_ACTIVITY": -0.014208659701987925,
+        "has_ERROR_PROBING": -0.004827225055681228,
+        "has_tcp_443": 0.08406868602928919,
+        "has_external_tcp": 0.0783134257120367,
+        "has_app_private_db": 0.0871576216402653,
+        "has_rwx_anon": -0.0008200572391468463,
+        "has_process_vm_readv": 0.006143994928413443,
+        "has_app_private_db_high_volume": 0.055903528402753255,
+        "has_error_probing_high_volume": 0.05209122621184059
+      }
+    },
+    "fidelity_oracle": {
+      "android10_rows": 1000,
+      "android14_rows": 1000,
+      "unique_hashes_each": [
+        1000,
+        1000
+      ],
+      "shared_hashes": 56
+    }
+  },
+  "direction_10_to_14": {
+    "n_pairs": 30746,
+    "n_claims": 377800,
+    "n_packages_in_holdout": 4349,
+    "n_packages_overall": 22475,
+    "recurrence": 0.899632080465855,
+    "support_by_indicator": {
+      "has_NETWORK_EXTERNAL": {
+        "n_source_positive": 11272,
+        "recurrence": 0.757097232079489,
+        "positive_rate_target_all_pairs": 0.41293176348142846
+      },
+      "has_NETWORK_LOCAL": {
+        "n_source_positive": 27660,
+        "recurrence": 0.9735719450469993,
+        "positive_rate_target_all_pairs": 0.9364470174982111
+      },
+      "has_BINDER_IPC": {
+        "n_source_positive": 29834,
+        "recurrence": 0.9992625863109205,
+        "positive_rate_target_all_pairs": 0.9992194106550446
+      },
+      "has_TLS_CERT_ACTIVITY": {
+        "n_source_positive": 14888,
+        "recurrence": 0.8258328855454057,
+        "positive_rate_target_all_pairs": 0.6327652377545047
+      },
+      "has_APP_PRIVATE_FILE_ACTIVITY": {
+        "n_source_positive": 29029,
+        "recurrence": 0.9727858348548004,
+        "positive_rate_target_all_pairs": 0.9639627919078905
+      },
+      "has_PROC_ACCESS": {
+        "n_source_positive": 26892,
+        "recurrence": 0.8184590212702663,
+        "positive_rate_target_all_pairs": 0.7868665842711247
+      },
+      "has_MEMORY_EXEC": {
+        "n_source_positive": 9749,
+        "recurrence": 0.773822956200636,
+        "positive_rate_target_all_pairs": 0.5003902946724778
+      },
+      "has_ENV_CHECK": {
+        "n_source_positive": 29712,
+        "recurrence": 0.9857296715131934,
+        "positive_rate_target_all_pairs": 0.9852013270018865
+      },
+      "has_PROCESS_ACTIVITY": {
+        "n_source_positive": 27623,
+        "recurrence": 0.9710024255149694,
+        "positive_rate_target_all_pairs": 0.9506277239315684
+      },
+      "has_PROCESS_MEMORY_READ": {
+        "n_source_positive": 11188,
+        "recurrence": 0.4605827672506257,
+        "positive_rate_target_all_pairs": 0.3405321017368113
+      },
+      "has_WAIT_ACTIVITY": {
+        "n_source_positive": 29828,
+        "recurrence": 0.9992289124312727,
+        "positive_rate_target_all_pairs": 0.9991868860990047
+      },
+      "has_ERROR_PROBING": {
+        "n_source_positive": 29783,
+        "recurrence": 0.9910015780814558,
+        "positive_rate_target_all_pairs": 0.9907955506407338
+      },
+      "has_tcp_443": {
+        "n_source_positive": 10979,
+        "recurrence": 0.760087439657528,
+        "positive_rate_target_all_pairs": 0.4036297404540428
+      },
+      "has_external_tcp": {
+        "n_source_positive": 11272,
+        "recurrence": 0.757097232079489,
+        "positive_rate_target_all_pairs": 0.41293176348142846
+      },
+      "has_app_private_db": {
+        "n_source_positive": 24575,
+        "recurrence": 0.9136927772126144,
+        "positive_rate_target_all_pairs": 0.809243478826514
+      },
+      "has_rwx_anon": {
+        "n_source_positive": 212,
+        "recurrence": 0.9669811320754716,
+        "positive_rate_target_all_pairs": 0.008781630130748716
+      },
+      "has_process_vm_readv": {
+        "n_source_positive": 11188,
+        "recurrence": 0.4605827672506257,
+        "positive_rate_target_all_pairs": 0.3405321017368113
+      },
+      "has_app_private_db_high_volume": {
+        "n_source_positive": 20537,
+        "recurrence": 0.9086526756585674,
+        "positive_rate_target_all_pairs": 0.68151954725818
+      },
+      "has_error_probing_high_volume": {
+        "n_source_positive": 21579,
+        "recurrence": 0.9538440150145975,
+        "positive_rate_target_all_pairs": 0.7770441683471021
+      }
+    },
+    "grouped_holdout": {
+      "seed": 314159,
+      "train_claims": 299781,
+      "test_claims": 78019,
+      "train_packages": 17393,
+      "test_packages": 4349,
+      "metrics": {
+        "global": {
+          "brier": 0.08722339360141304,
+          "log_loss": 0.317488648276749,
+          "ap": 0.9034850485138236
+        },
+        "persistence": {
+          "brier": 0.07025159874581259,
+          "log_loss": 0.23678477340894044,
+          "ap": 0.9782632393657702
+        },
+        "boolean": {
+          "brier": 0.06518482264180762,
+          "log_loss": 0.213746671935998,
+          "ap": 0.9868391225065182
+        },
+        "evidence_count": {
+          "brier": 0.0646749632617915,
+          "log_loss": 0.2116232159463716,
+          "ap": 0.9875041944336092
+        },
+        "normalized_evidence_count": {
+          "brier": 0.06713403748810441,
+          "log_loss": 0.22142988602116945,
+          "ap": 0.9857587994124266
+        },
+        "activity_volume": {
+          "brier": 0.06513151634818556,
+          "log_loss": 0.2132700399194157,
+          "ap": 0.987140318547729
+        },
+        "rich": {
+          "brier": 0.06414391439493028,
+          "log_loss": 0.21015686505864173,
+          "ap": 0.9876170269928094
+        },
+        "rich_normalized_counts": {
+          "brier": 0.06435011634731919,
+          "log_loss": 0.21078671955596395,
+          "ap": 0.9875306249087983
+        }
+      }
+    },
+    "holdout_metrics": {
+      "global": {
+        "brier": 0.08722339360141304,
+        "log_loss": 0.317488648276749,
+        "ap": 0.9034850485138236
+      },
+      "persistence": {
+        "brier": 0.07025159874581259,
+        "log_loss": 0.23678477340894044,
+        "ap": 0.9782632393657702
+      },
+      "boolean": {
+        "brier": 0.06518482264180762,
+        "log_loss": 0.213746671935998,
+        "ap": 0.9868391225065182
+      },
+      "evidence_count": {
+        "brier": 0.0646749632617915,
+        "log_loss": 0.2116232159463716,
+        "ap": 0.9875041944336092
+      },
+      "normalized_evidence_count": {
+        "brier": 0.06713403748810441,
+        "log_loss": 0.22142988602116945,
+        "ap": 0.9857587994124266
+      },
+      "activity_volume": {
+        "brier": 0.06513151634818556,
+        "log_loss": 0.2132700399194157,
+        "ap": 0.987140318547729
+      },
+      "rich": {
+        "brier": 0.06414391439493028,
+        "log_loss": 0.21015686505864173,
+        "ap": 0.9876170269928094
+      },
+      "rich_normalized_counts": {
+        "brier": 0.06435011634731919,
+        "log_loss": 0.21078671955596395,
+        "ap": 0.9875306249087983
+      }
+    },
+    "brier_skill_vs_persistence": {
+      "global": -0.2415858878458914,
+      "boolean": 0.072123285369459,
+      "evidence_count": 0.07938090496984596,
+      "normalized_evidence_count": 0.04437708626373438,
+      "activity_volume": 0.07288207655106516,
+      "rich": 0.08694014741189593,
+      "rich_normalized_counts": 0.08400495510210959
+    },
+    "paired_cluster_bootstrap_ci_brier_improvement_vs_persistence": {
+      "boolean": [
+        0.0041928846618660524,
+        0.0061515068913778285
+      ],
+      "evidence_count": [
+        0.004520389283055927,
+        0.00669816072103657
+      ],
+      "normalized_evidence_count": [
+        0.0023440701570858827,
+        0.0039688758807156915
+      ],
+      "activity_volume": [
+        0.004165559863689049,
+        0.006167834360555237
+      ],
+      "rich": [
+        0.005092362928638861,
+        0.007247955797489396
+      ],
+      "rich_normalized_counts": [
+        0.004915922543307115,
+        0.007009189155024859
+      ]
+    },
+    "broken_pair_negative_control": {
+      "metrics_after_test_target_app_permutation": {
+        "global": {
+          "brier": 0.1586628548923537,
+          "log_loss": 0.5130175487730445,
+          "ap": 0.8138786705802433
+        },
+        "persistence": {
+          "brier": 0.1254685480285348,
+          "log_loss": 0.3873924692503672,
+          "ap": 0.9624232002651542
+        },
+        "boolean": {
+          "brier": 0.13195079633167017,
+          "log_loss": 0.4234262850167278,
+          "ap": 0.9591893459080886
+        },
+        "evidence_count": {
+          "brier": 0.1326817506781998,
+          "log_loss": 0.4310319797844796,
+          "ap": 0.9576045999499001
+        },
+        "normalized_evidence_count": {
+          "brier": 0.12992029241248298,
+          "log_loss": 0.416346885659428,
+          "ap": 0.9577109192068876
+        },
+        "activity_volume": {
+          "brier": 0.1315377822650949,
+          "log_loss": 0.42400843032473556,
+          "ap": 0.9585280364181374
+        },
+        "rich": {
+          "brier": 0.1332809333021427,
+          "log_loss": 0.43323160037967834,
+          "ap": 0.9580526728449482
+        },
+        "rich_normalized_counts": {
+          "brier": 0.13296128625385825,
+          "log_loss": 0.4307524369143427,
+          "ap": 0.958386440074056
+        }
+      },
+      "brier_improvement_vs_persistence": {
+        "boolean": -0.006482248303135374,
+        "evidence_count": -0.00721320264966499,
+        "normalized_evidence_count": -0.004451744383948186,
+        "activity_volume": -0.0060692342365601115,
+        "rich": -0.007812385273607891,
+        "rich_normalized_counts": -0.007492738225323453
+      }
+    },
+    "descriptive_selective_and_report_metrics": {
+      "persistence": {
+        "0.5": {
+          "coverage": 0.5000064086953178,
+          "nonrecurrence_risk": 0.013648477821887082,
+          "recurrence_retention": 0.5458663462408061,
+          "mean_unsupported_claims_per_report": 0.08554420305781088,
+          "expected_reports_with_any_unsupported_transfer": 0.05140031444614784,
+          "cutoff_tie_count": 5708,
+          "fractional_tie_selection": 0.40399439383321656
+        },
+        "0.8": {
+          "coverage": 0.7999974365218728,
+          "nonrecurrence_risk": 0.043615645738771414,
+          "recurrence_retention": 0.8468375132462452,
+          "mean_unsupported_claims_per_report": 0.4373827970413589,
+          "expected_reports_with_any_unsupported_transfer": 0.27254153310980683,
+          "cutoff_tie_count": 5541,
+          "fractional_tie_selection": 0.5231907597906515
+        }
+      },
+      "boolean": {
+        "0.5": {
+          "coverage": 0.5000064086953178,
+          "nonrecurrence_risk": 0.0035021596221975057,
+          "recurrence_retention": 0.5514815184374594,
+          "mean_unsupported_claims_per_report": 0.021950393133342655,
+          "expected_reports_with_any_unsupported_transfer": 0.014122011164771813,
+          "cutoff_tie_count": 717,
+          "fractional_tie_selection": 0.9079497907949791
+        },
+        "0.8": {
+          "coverage": 0.7999974365218728,
+          "nonrecurrence_risk": 0.03390909819172256,
+          "recurrence_retention": 0.8554322466819452,
+          "mean_unsupported_claims_per_report": 0.34004440289787335,
+          "expected_reports_with_any_unsupported_transfer": 0.23215120355223184,
+          "cutoff_tie_count": 165,
+          "fractional_tie_selection": 0.793939393939394
+        }
+      },
+      "rich": {
+        "0.5": {
+          "coverage": 0.5000064086953178,
+          "nonrecurrence_risk": 0.0029735965137144323,
+          "recurrence_retention": 0.5517740356651393,
+          "mean_unsupported_claims_per_report": 0.018637532133676093,
+          "expected_reports_with_any_unsupported_transfer": 0.01333547557840617,
+          "cutoff_tie_count": 1,
+          "fractional_tie_selection": 1.0
+        },
+        "0.8": {
+          "coverage": 0.7999974365218728,
+          "nonrecurrence_risk": 0.033517583914123204,
+          "recurrence_retention": 0.8557789158592121,
+          "mean_unsupported_claims_per_report": 0.3361182519280206,
+          "expected_reports_with_any_unsupported_transfer": 0.21449228791773778,
+          "cutoff_tie_count": 1,
+          "fractional_tie_selection": 1.0
+        }
+      }
+    },
+    "metric_scope_note": "Grouped holdout is discovery only; fixed coverage uses held-out ranks, and cluster bootstrap uses 300 packages draws."
+  },
+  "direction_14_to_10": {
+    "n_pairs": 30746,
+    "n_claims": 397626,
+    "n_packages_in_holdout": 4492,
+    "n_packages_overall": 22475,
+    "recurrence": 0.8547755931453175,
+    "support_by_indicator": {
+      "has_NETWORK_EXTERNAL": {
+        "n_source_positive": 12696,
+        "recurrence": 0.6721802142407057,
+        "positive_rate_target_all_pairs": 0.36661679568073896
+      },
+      "has_NETWORK_LOCAL": {
+        "n_source_positive": 28792,
+        "recurrence": 0.9352945262572937,
+        "positive_rate_target_all_pairs": 0.8996292200611462
+      },
+      "has_BINDER_IPC": {
+        "n_source_positive": 30722,
+        "recurrence": 0.9703795325825142,
+        "positive_rate_target_all_pairs": 0.9703376048916932
+      },
+      "has_TLS_CERT_ACTIVITY": {
+        "n_source_positive": 19455,
+        "recurrence": 0.6319712156258032,
+        "positive_rate_target_all_pairs": 0.4842255903206921
+      },
+      "has_APP_PRIVATE_FILE_ACTIVITY": {
+        "n_source_positive": 29638,
+        "recurrence": 0.9527970848235373,
+        "positive_rate_target_all_pairs": 0.9441553372796462
+      },
+      "has_PROC_ACCESS": {
+        "n_source_positive": 24193,
+        "recurrence": 0.9097672880585294,
+        "positive_rate_target_all_pairs": 0.874650361022572
+      },
+      "has_MEMORY_EXEC": {
+        "n_source_positive": 15385,
+        "recurrence": 0.49034774130646736,
+        "positive_rate_target_all_pairs": 0.31708189683210825
+      },
+      "has_ENV_CHECK": {
+        "n_source_positive": 30291,
+        "recurrence": 0.9668878544782279,
+        "positive_rate_target_all_pairs": 0.9663696090548364
+      },
+      "has_PROCESS_ACTIVITY": {
+        "n_source_positive": 29228,
+        "recurrence": 0.9176816751060627,
+        "positive_rate_target_all_pairs": 0.8984258114876732
+      },
+      "has_PROCESS_MEMORY_READ": {
+        "n_source_positive": 10470,
+        "recurrence": 0.49216809933142314,
+        "positive_rate_target_all_pairs": 0.3638847329733949
+      },
+      "has_WAIT_ACTIVITY": {
+        "n_source_positive": 30721,
+        "recurrence": 0.9701832622635982,
+        "positive_rate_target_all_pairs": 0.9701424575554544
+      },
+      "has_ERROR_PROBING": {
+        "n_source_positive": 30463,
+        "recurrence": 0.9688802809966188,
+        "positive_rate_target_all_pairs": 0.9686788525336629
+      },
+      "has_tcp_443": {
+        "n_source_positive": 12410,
+        "recurrence": 0.6724415793714746,
+        "positive_rate_target_all_pairs": 0.35708710076107464
+      },
+      "has_external_tcp": {
+        "n_source_positive": 12696,
+        "recurrence": 0.6721802142407057,
+        "positive_rate_target_all_pairs": 0.36661679568073896
+      },
+      "has_app_private_db": {
+        "n_source_positive": 24881,
+        "recurrence": 0.9024556890800209,
+        "positive_rate_target_all_pairs": 0.7992909646783322
+      },
+      "has_rwx_anon": {
+        "n_source_positive": 270,
+        "recurrence": 0.7592592592592593,
+        "positive_rate_target_all_pairs": 0.006895205880439732
+      },
+      "has_process_vm_readv": {
+        "n_source_positive": 10470,
+        "recurrence": 0.49216809933142314,
+        "positive_rate_target_all_pairs": 0.3638847329733949
+      },
+      "has_app_private_db_high_volume": {
+        "n_source_positive": 20954,
+        "recurrence": 0.8905698196048487,
+        "positive_rate_target_all_pairs": 0.6679568073895791
+      },
+      "has_error_probing_high_volume": {
+        "n_source_positive": 23891,
+        "recurrence": 0.8615378175882131,
+        "positive_rate_target_all_pairs": 0.7018473947830612
+      }
+    },
+    "grouped_holdout": {
+      "seed": 314159,
+      "train_claims": 319144,
+      "test_claims": 78482,
+      "train_packages": 17964,
+      "test_packages": 4492,
+      "metrics": {
+        "global": {
+          "brier": 0.12334386549190193,
+          "log_loss": 0.4123615926366051,
+          "ap": 0.855890522667618
+        },
+        "persistence": {
+          "brier": 0.09953159192243831,
+          "log_loss": 0.3286164789304477,
+          "ap": 0.9494177816803058
+        },
+        "boolean": {
+          "brier": 0.09776341859262785,
+          "log_loss": 0.32192204011608866,
+          "ap": 0.9548296184372882
+        },
+        "evidence_count": {
+          "brier": 0.09608097373884984,
+          "log_loss": 0.31649343052608264,
+          "ap": 0.9585328054906178
+        },
+        "normalized_evidence_count": {
+          "brier": 0.09681744704979499,
+          "log_loss": 0.3175196396447402,
+          "ap": 0.9596119806642598
+        },
+        "activity_volume": {
+          "brier": 0.09689498922565928,
+          "log_loss": 0.31934145879072523,
+          "ap": 0.9569210405881641
+        },
+        "rich": {
+          "brier": 0.09554497779185726,
+          "log_loss": 0.31383245149033784,
+          "ap": 0.9605517781990718
+        },
+        "rich_normalized_counts": {
+          "brier": 0.09591203495718885,
+          "log_loss": 0.3150163013899935,
+          "ap": 0.9601381780284308
+        }
+      }
+    },
+    "holdout_metrics": {
+      "global": {
+        "brier": 0.12334386549190193,
+        "log_loss": 0.4123615926366051,
+        "ap": 0.855890522667618
+      },
+      "persistence": {
+        "brier": 0.09953159192243831,
+        "log_loss": 0.3286164789304477,
+        "ap": 0.9494177816803058
+      },
+      "boolean": {
+        "brier": 0.09776341859262785,
+        "log_loss": 0.32192204011608866,
+        "ap": 0.9548296184372882
+      },
+      "evidence_count": {
+        "brier": 0.09608097373884984,
+        "log_loss": 0.31649343052608264,
+        "ap": 0.9585328054906178
+      },
+      "normalized_evidence_count": {
+        "brier": 0.09681744704979499,
+        "log_loss": 0.3175196396447402,
+        "ap": 0.9596119806642598
+      },
+      "activity_volume": {
+        "brier": 0.09689498922565928,
+        "log_loss": 0.31934145879072523,
+        "ap": 0.9569210405881641
+      },
+      "rich": {
+        "brier": 0.09554497779185726,
+        "log_loss": 0.31383245149033784,
+        "ap": 0.9605517781990718
+      },
+      "rich_normalized_counts": {
+        "brier": 0.09591203495718885,
+        "log_loss": 0.3150163013899935,
+        "ap": 0.9601381780284308
+      }
+    },
+    "brier_skill_vs_persistence": {
+      "global": -0.23924337096928716,
+      "boolean": 0.017764945738920068,
+      "evidence_count": 0.034668572228578665,
+      "normalized_evidence_count": 0.027269179767147378,
+      "activity_volume": 0.02649010877705682,
+      "rich": 0.04005375633585451,
+      "rich_normalized_counts": 0.03636591051482485
+    },
+    "paired_cluster_bootstrap_ci_brier_improvement_vs_persistence": {
+      "boolean": [
+        0.0011638890825808577,
+        0.002352351476034134
+      ],
+      "evidence_count": [
+        0.002681178915930221,
+        0.004131403509009224
+      ],
+      "normalized_evidence_count": [
+        0.0018525840486986037,
+        0.003591890901123199
+      ],
+      "activity_volume": [
+        0.0019048569258900735,
+        0.0034448981601598256
+      ],
+      "rich": [
+        0.0030929107283447573,
+        0.004898197883024933
+      ],
+      "rich_normalized_counts": [
+        0.0027526778130475007,
+        0.004553751133512702
+      ]
+    },
+    "broken_pair_negative_control": {
+      "metrics_after_test_target_app_permutation": {
+        "global": {
+          "brier": 0.1843862973835938,
+          "log_loss": 0.5647821115130602,
+          "ap": 0.7697943477485283
+        },
+        "persistence": {
+          "brier": 0.1395967476447289,
+          "log_loss": 0.4299415932107369,
+          "ap": 0.9361937131147197
+        },
+        "boolean": {
+          "brier": 0.14174236112442784,
+          "log_loss": 0.44054100765077536,
+          "ap": 0.9320452249981577
+        },
+        "evidence_count": {
+          "brier": 0.1427401604490964,
+          "log_loss": 0.44480069989887566,
+          "ap": 0.9327059652571699
+        },
+        "normalized_evidence_count": {
+          "brier": 0.14329089390335875,
+          "log_loss": 0.44852287284455783,
+          "ap": 0.9291437525594239
+        },
+        "activity_volume": {
+          "brier": 0.1425744258541288,
+          "log_loss": 0.4440775224722099,
+          "ap": 0.9323132820040593
+        },
+        "rich": {
+          "brier": 0.14415744660466354,
+          "log_loss": 0.45081930983197444,
+          "ap": 0.930219409276122
+        },
+        "rich_normalized_counts": {
+          "brier": 0.1438424594137357,
+          "log_loss": 0.4499813327856868,
+          "ap": 0.9299135450157936
+        }
+      },
+      "brier_improvement_vs_persistence": {
+        "boolean": -0.002145613479698938,
+        "evidence_count": -0.0031434128043675014,
+        "normalized_evidence_count": -0.003694146258629849,
+        "activity_volume": -0.0029776782093998977,
+        "rich": -0.004560698959934634,
+        "rich_normalized_counts": -0.004245711769006788
+      }
+    },
+    "descriptive_selective_and_report_metrics": {
+      "persistence": {
+        "0.5": {
+          "coverage": 0.5,
+          "nonrecurrence_risk": 0.042286269318218814,
+          "recurrence_retention": 0.5594837805288478,
+          "mean_unsupported_claims_per_report": 0.27224864549897043,
+          "expected_reports_with_any_unsupported_transfer": 0.0953178757399844,
+          "cutoff_tie_count": 5806,
+          "fractional_tie_selection": 0.5904236996210817
+        },
+        "0.8": {
+          "coverage": 0.8000050967100737,
+          "nonrecurrence_risk": 0.07477760537382867,
+          "recurrence_retention": 0.8648099396921157,
+          "mean_unsupported_claims_per_report": 0.7703013504513875,
+          "expected_reports_with_any_unsupported_transfer": 0.3231016941337593,
+          "cutoff_tie_count": 4974,
+          "fractional_tie_selection": 0.5253317249698432
+        }
+      },
+      "boolean": {
+        "0.5": {
+          "coverage": 0.5,
+          "nonrecurrence_risk": 0.03355158987141841,
+          "recurrence_retention": 0.5645864655191994,
+          "mean_unsupported_claims_per_report": 0.21601278722630515,
+          "expected_reports_with_any_unsupported_transfer": 0.052045364207606366,
+          "cutoff_tie_count": 97,
+          "fractional_tie_selection": 0.6907216494845361
+        },
+        "0.8": {
+          "coverage": 0.8000050967100737,
+          "nonrecurrence_risk": 0.07504612738263551,
+          "recurrence_retention": 0.8645589508449033,
+          "mean_unsupported_claims_per_report": 0.7730674575629456,
+          "expected_reports_with_any_unsupported_transfer": 0.2946172777181801,
+          "cutoff_tie_count": 208,
+          "fractional_tie_selection": 0.9230769230769231
+        }
+      },
+      "rich": {
+        "0.5": {
+          "coverage": 0.5,
+          "nonrecurrence_risk": 0.030656711092989477,
+          "recurrence_retention": 0.5662776156731971,
+          "mean_unsupported_claims_per_report": 0.1973748974569319,
+          "expected_reports_with_any_unsupported_transfer": 0.04774405250205086,
+          "cutoff_tie_count": 1,
+          "fractional_tie_selection": 1.0
+        },
+        "0.8": {
+          "coverage": 0.8000050967100737,
+          "nonrecurrence_risk": 0.07023858822030389,
+          "recurrence_retention": 0.8690525814327398,
+          "mean_unsupported_claims_per_report": 0.7235438884331419,
+          "expected_reports_with_any_unsupported_transfer": 0.2721903199343724,
+          "cutoff_tie_count": 1,
+          "fractional_tie_selection": 1.0
+        }
+      }
+    },
+    "metric_scope_note": "Grouped holdout is discovery only; fixed coverage uses held-out ranks, and cluster bootstrap uses 300 packages draws."
+  }
+}

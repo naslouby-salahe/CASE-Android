@@ -2,7 +2,7 @@
 
 **Project:** CASE-Android  
 **Acronym:** Context-Aware Scoping of Evidence in Android  
-**Full title:** *CASE-Android: Context-Aware Claim Portability for Recorded Android Behavioral-Security Evidence Across Versioned Execution Contexts*  
+**Full title:** *CASE-Android: Reliability-Qualified Scoping of Recorded Android Behavioral-Security Evidence Across Execution Contexts*  
 **Role:** Authoritative scientific roadmap for the CASE-Android project  
 **Companion document:** [`technical_doc.md`](technical_doc.md) defines implementation and engineering contracts.
 
@@ -10,71 +10,71 @@
 
 ## 1. Research statement
 
-Dynamic Android analysis reports describe behavior that was **observed in a particular execution context**. The same APK may produce a different recorded report in another context because the Android version, emulator/runtime, interaction path, observation window, instrumentation, and execution stochasticity can all affect what is seen.
+Dynamic Android analysis reports describe behavior that was **recorded in a finite execution context**. The same APK may yield different recorded evidence under another context because platform version, execution substrate, stimulation, observation duration, instrumentation, lifecycle state, and ordinary execution stochasticity can all affect what is observed.
 
-CASE-Android studies a narrow operational question:
+CASE-Android studies the operational problem that follows from this fact:
 
-> **Given a behavioral-security indicator observed for an APK in one recorded Android context, how strongly should that evidence be carried into a named target context that has not yet been observed?**
+> **Given behavioral-security evidence recorded for an APK in a source context, how reliably should that evidence be carried into a named target context that has not yet been observed?**
 
-The project does **not** try to prove that a behavior is truly present or absent in the APK. It predicts **recorded cross-context recurrence** and uses that estimate to scope the wording of a security report.
+The project does **not** infer complete application capability and does not treat a source non-observation as proof of target absence. Its primary predictive estimand remains **source-positive recorded-evidence recurrence**. A separate secondary descriptive estimand captures **target-recorded emergence** when evidence was not recorded in the source context.
 
-The intended contribution is a lightweight, claim-level reporting layer:
+The intended contribution is a lightweight, claim-level reliability and reporting layer:
 
 ```text
 recorded source-context evidence
-          ↓
-source-positive claim
-          ↓
-source-only context features
-          ↓
+        ↓
+source claim + source-only evidence properties
+        ↓
 cross-context recurrence score
-          ↓
-calibration / operating-point view
-          ↓
+        ↓
+probability-quality / calibration analysis
+        ↓
+calibration-only operating policy
+        ↓
 report scope
- ┌───────────────────────────────┐
- │ cross-context-supported       │
- │ source-context-only           │
- └───────────────────────────────┘
-
-(optional uncertainty/abstention sensitivity only if it proves useful)
+┌───────────────────────────────┐
+│ cross-context-supported       │
+│ source-context-only           │
+└───────────────────────────────┘
 ```
 
-This is deliberately a **decision/reporting contribution**, not a new malware classifier and not a new deep-learning architecture.
+The primary semantic study uses SELENE's Android 10/API29 and Android 14/API34 paired observations. A second dataset may support a **separate context-family replication** when identity, feature semantics, licensing, grouping, and leakage gates pass. The current audited secondary candidate is KronoDroid's paired emulator/device syscall profiles; those syscall-presence claims are never pooled with SELENE semantic indicators as if they were the same ontology.
+
+CASE-Android is therefore a **recorded-evidence portability and report-scoping contribution**, not a malware classifier, behavior-truth oracle, causal Android-version study, or deep-learning architecture.
 
 ### Research-development principle
 
-CASE-Android is the result of a long discovery, dataset-audit, feasibility, and collision-screening process. That work was done precisely to arrive at a research direction that is both **scientifically defensible and practically feasible**. The roadmap therefore uses gates as evidence-quality controls, not as arbitrary reasons to discard the project.
+CASE-Android follows an evidence-first development process. Pre-implementation feasibility, dataset, and novelty audits are used to decide which scientific lanes belong in the roadmap and which remain gated extensions. The roadmap itself is prospective: it specifies what must be tested, how it must be tested, and what evidence is required for each claim; it does not embed discovery-stage outcomes.
 
-When new evidence exposes a weaker effect, an asymmetric result, a dataset limitation, or a narrower construct than expected, the default response is:
+When new evidence exposes a weaker effect, asymmetric result, dataset limitation, or narrower construct than expected, the default response is:
 
 ```text
 audit the issue
 → preserve methodological validity
-→ adapt the mechanism if scientifically justified
-→ narrow or reformulate the claim
-→ continue with the strongest defensible version
+→ repair the protocol only when scientifically justified
+→ narrow or reformulate the affected claim
+→ retain the strongest defensible version
 ```
 
-The project should stop or fundamentally re-scope only for a **structural validity failure** such as unrecoverable leakage, an invalid estimand, unusable provenance/licensing, or a direct capability collision that removes the contribution itself. A modest result is not automatically a failed project; it usually means a more modest claim.
-
----
+The project should stop or fundamentally re-scope only for a **structural validity failure** such as unrecoverable leakage, invalid identity/pairing, incompatible claim semantics, unusable provenance/licensing, or a direct novelty collision that removes the contribution itself. A modest predictive effect is not a structural failure.
 
 ## 2. Why this is worth studying
 
-The core failure mode is simple: a dynamic-analysis report can sound global even though its evidence was recorded under one finite execution condition. Prior Android work already shows that dynamic behavior can vary across devices and environments, and SELENE itself documents Android-version effects. CASE-Android therefore does **not** claim to discover context dependence.
+Prior Android work already establishes that dynamic observations can vary across devices, emulators, runtime conditions, versions, and repeated executions. CASE-Android therefore does **not** claim discovery of context sensitivity.
 
-The residual problem is what to do with that dependence at the level of an individual report claim.
+The residual problem is narrower and operational:
 
-A conservative intersection rule avoids over-generalization but can discard large amounts of observed evidence. An always-report rule preserves coverage but silently treats context-specific observations as portable. CASE-Android tests whether a simple source-only recurrence score can give a better **coverage-versus-non-recurrence** trade-off than those naive assumptions.
+> when a security report contains an observation from one context, should that individual claim be generalized to another named context, or remain explicitly source-context-specific?
 
-The novelty target is therefore modest and practical:
+A conservative source/target intersection can avoid some over-generalization but is not prospective because it requires seeing the target report. Always-generalize preserves coverage but silently assumes portability. Per-indicator persistence is a strong prospective baseline whenever recurrence is common.
 
-> **Explicit, claim-level, context-scoped reporting of recorded Android behavioral-security evidence, evaluated as a selective evidence-transfer decision.**
+CASE-Android therefore tests whether **source-only evidence about the APK and the observed claim** can improve recurrence estimation beyond those simple priors, and whether that improvement translates into a better **coverage-versus-non-recurrence** reporting trade-off under a calibration-only operating policy.
 
-It is not a claim of unprecedented novelty. The project only needs to show that this reporting capability is distinct enough, useful enough, and empirically defensible enough for a technically meaningful chapter.
+The novelty target is specific:
 
----
+> **Estimate recurrence of an individual recorded source claim in a named unobserved target context, then use that estimate to scope report language and quantify the associated coverage/non-recurrence trade-off.**
+
+The project does not need to invent a new classifier family to be useful. Its added value must come from the estimand, leakage-controlled evidence transfer, source-evidence ablations, calibrated/scoped reporting, negative controls, report-level reconstruction, and bounded external replication.
 
 ## 3. Relationship to the PhD
 
@@ -102,139 +102,230 @@ The chapter may motivate future work in which federated or collaborative systems
 
 ### In scope
 
-- Recorded SELENE behavioral/security indicators.
-- Android 10 / API 29 and Android 14 / API 34 execution-context pairs.
-- Source-positive claim recurrence in the paired target context.
+- Exact paired SELENE Android 10/API29 and Android 14/API34 recorded observations.
+- Source-positive semantic claim recurrence.
+- Symmetric paired evidence transitions: stable-absent, target-recorded-emergent, source-only, and stable-present.
+- Target-recorded emergence as a **separate descriptive estimand** over source-negative observations.
 - Source-only recurrence scoring.
-- Selective reporting and evidence scoping.
-- Coverage-versus-non-recurrence trade-offs.
-- Direction-specific and indicator-specific heterogeneity.
-- Calibration and uncertainty of recurrence estimates.
-- Reproducible offline analysis of released artifacts.
+- The 19 released Boolean indicators as the primary semantic claim ontology.
+- Source-side evidence-strength/count/activity features as a secondary representation ladder.
+- Raw-count versus duration-normalized evidence-strength sensitivity.
+- Broad/non-derived indicator sensitivity defined from schema semantics before frozen test evaluation.
+- Selective reporting and claim scoping with calibration-only operating-point selection.
+- Probability quality, calibration, coverage-versus-non-recurrence, recurrence retention, and APK/report-level offline proxy metrics.
+- Direction-, indicator-, package-, report-, and fidelity-related heterogeneity.
+- Paired-population selection audit and execution-duration exposure audit.
+- Broken-pair and other leakage/shortcut negative controls.
+- A separate KronoDroid emulator/device syscall-presence replication after its remaining schema/grouping gates pass.
+- Reproducible offline analysis of released datasets and traces.
+
+### Gated extensions, not core claims
+
+These may enter only after their explicit validity gates pass:
+
+- AndroCT method/class/package/API granularity analysis.
+- DYNAMISM repeated-run analysis for same-context stochasticity.
+- CIC-InvesAndMal2019 install/pre-reboot/post-reboot transitions.
+- formal finite-sample risk guarantees;
+- chronological portability drift;
+- future-period generalization;
+- malware-family OOD;
+- unseen-claim OOD;
+- multi-hop or worst-context portability.
 
 ### Explicitly out of scope
 
-- Malware classification or family attribution.
+- Malware classification or malware-family attribution as a CASE target.
 - Proving that an APK can or cannot perform a behavior.
-- Treating a non-observation as proof of absence.
-- Causal attribution to Android OS version alone.
-- Universal Android-version portability.
+- Treating source non-observation as proof of target absence.
+- Saying that a behavior itself “emerged” merely because it was newly recorded.
+- Causal attribution to Android OS version, emulator/device status, or any single context component.
+- Universal Android portability.
+- Fresh APK execution campaigns.
+- New emulator/device capture campaigns as a project dependency.
+- Purchasing or manually operating physical devices.
+- User recruitment or field deployment.
 - Real-world analyst productivity or security benefit unless separately measured.
-- APK execution, emulator campaigns, fresh captures, or physical devices.
+- Formal distribution-free risk guarantees without a dependence/shift-valid method.
 - Federated-learning or IoT performance claims.
-- Deep learning merely to increase model complexity.
+- Deep learning or complex model tournaments merely to increase novelty.
 
----
+## 5. Pre-implementation design basis
 
-## 5. Current evidence base
+This roadmap is informed by a separate feasibility, dataset, novelty, and claim/gate audit. Those materials are **not part of the scientific result set**. Their role is only to identify feasible additions, remove weak or collision-prone ideas, and define the prospective protocol below.
 
-The authoritative discovery evidence comes from the latest R5 audit in the FedIEC research project.
+The roadmap therefore adopts the following design decisions without importing discovery-stage outcome values:
 
-### 5.1 SELENE audit anchors
+### 5.1 Primary semantic dataset
 
-- Android 10/API29 selected runs: **44,485**.
-- Android 14/API34 selected runs: **30,751**.
-- Exact paired APK SHA-256 identities: **30,746**.
-- Package groups in the audited population: **22,475**.
-- Android-10-only identities: **13,739**.
-- Android-14-only identities: **5**.
-- Shared processed Boolean indicators used by the R5 probes: **19**.
-- Current project-local compact inputs: **29,777,711 bytes** across the eight audited files.
-- The fidelity oracle contains 1,000 rows per context but only **56 shared APK hashes** across the two oracle subsets.
+SELENE / ARTEMIS is the primary dataset because it provides:
 
-The official SELENE dataset card confirms that `android10` and `android14` are **execution-environment splits, not train/test splits**, and that the artifacts are finite Monkey-driven emulator observations. Absence of an event is not proof that the APK cannot perform it.
+- two named Android execution contexts;
+- exact APK identity suitable for paired analysis;
+- package identity suitable for grouped evaluation;
+- a compact semantic `run_features` representation;
+- the released Boolean indicator ontology used for claim-level recurrence;
+- source-side evidence counts/activity/timing fields that can support a secondary representation ladder;
+- fidelity/provenance material suitable for limited parser and extraction diagnostics.
 
-### 5.2 Existing exploratory signal
+The primary study remains bounded to **recorded observations in the tested named contexts**. It does not interpret non-observation as behavior absence or attribute differences causally to Android version alone.
 
-The latest audited exploratory probe uses source-positive `(APK, indicator)` claims, package-grouped train/test splits, source-context flags only, and the target label “same processed flag appears in the paired target context.”
+### 5.2 Secondary context-family replication
 
-For the all-19-indicator pooled model:
+KronoDroid is retained as the preferred **gated secondary replication dataset** because it exposes paired emulator/device dynamic evidence at the syscall level and can support a separate source-positive recurrence construct.
 
-| Direction | Exploratory recurrence | Pooled AP | Persistence AP | Pooled Brier | Persistence Brier | Pooled top-50 precision | Persistence top-50 |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| Android 10 → 14 | ~0.898–0.900 | ~0.9865 | ~0.9778 | ~0.066–0.067 | ~0.072 | ~0.9965–0.9967 | ~0.9859–0.9863 |
-| Android 14 → 10 | ~0.852–0.857 | ~0.952–0.957 | ~0.944–0.950 | ~0.097–0.102 | ~0.099–0.104 | ~0.961–0.968 | ~0.953–0.959 |
+It is not pooled with SELENE. Before model-level use, it must pass its own access/provenance, identity, schema-comparability, grouping, leakage, and baseline-fairness gates. Malware-family or temporal claims remain excluded unless their metadata semantics are independently validated.
 
-These results are **exploratory only**. The three historical `GroupShuffleSplit` runs overlap and are not independent replications. The earlier “non-saturated” slice used target-test prevalence to select indicators and is therefore post-hoc; it cannot become the protocol-frozen headline.
+### 5.3 Gated optional datasets
 
-### 5.3 Fidelity warning
+The following remain optional extensions rather than dependencies of the core project:
 
-Several compact flags do not agree perfectly with raw-evidence paths in the SELENE fidelity material. For example, audited TLS activity agreement was approximately 0.545 in Android 10 and 0.659 in Android 14. The fidelity material checks parser/provenance behavior from the same underlying traces; it is not independent ground truth for cross-context security truth.
+- **AndroCT** for evidence-abstraction/granularity studies after access and exact-pair validation;
+- **DYNAMISM 2016–2023** for same-context repeated-run stochasticity after lawful access and comparable-unit validation;
+- **CIC-InvesAndMal2019** for lifecycle/reboot transitions after exact cross-stage identity and feature comparability are proven;
+- **TraceDroid** or other historical-profile datasets only for separately validated cohort questions.
 
-Therefore the estimand throughout CASE-Android is **processed-flag recurrence**, not behavior truth.
+### 5.4 Design consequences carried into the roadmap
 
----
+The main protocol must therefore include:
 
-## 6. Operational scenario and estimand
+- a four-state paired evidence characterization in addition to directional recurrence;
+- target-recorded emergence as a **separate descriptive estimand**;
+- a primary Boolean CASE scorer and a secondary source-evidence-strength representation ladder;
+- raw-count and exposure-normalized source-feature sensitivities;
+- explicit paired-population and observation-exposure audits;
+- schema-defined broad/non-derived indicator sensitivity;
+- broken-pair negative controls;
+- package-grouped fit/calibration/test separation;
+- report-level offline scoping metrics;
+- external model-level replication before broad multi-context framework claims;
+- validity gates and claim-promotion gates kept separate.
 
-CASE-Android only has operational value if it makes a decision **before the target context is observed**.
+No numerical discovery-stage result is a success criterion for the future implementation. The frozen evaluation decides claim strength.
 
-For a source context `s`, target context `t`, APK `a`, and indicator `j`:
+## 6. Operational scenario and estimands
 
-- `x[a,j,s] = 1` means the indicator was recorded in the source report.
-- A CASE claim exists only when `x[a,j,s] = 1`.
-- The target outcome is `y[a,j,s→t] = x[a,j,t]`.
-- CASE estimates:
+CASE-Android only has operational value if its transfer decision is made **before the target context is observed**.
+
+For source context `s`, target context `t`, APK `a`, and claim/indicator `j`:
+
+- `x[a,j,s] = 1` means the evidence was recorded in the source context;
+- `x[a,j,t] = 1` means the corresponding evidence was recorded in the paired target context.
+
+### 6.1 Primary predictive estimand — source-positive recurrence
+
+A primary CASE claim exists only when:
+
+\[
+x_{a,j,s}=1.
+\]
+
+The target outcome is:
+
+\[
+y_{a,j}^{s\rightarrow t}=x_{a,j,t}.
+\]
+
+CASE estimates:
 
 \[
 \hat p_{a,j}^{s\rightarrow t}
-= P\left(y_{a,j}^{s\rightarrow t}=1\mid X_a^s, j\right),
+=
+P\!\left(
+y_{a,j}^{s\rightarrow t}=1
+\mid X_a^s,\;j
+\right),
 \]
 
 where `X_a^s` contains **source-context information only**.
 
-The primary decision unit is therefore:
+The primary decision unit is:
 
-> **one source-positive APK × indicator claim in one declared direction.**
+> **one source-positive APK × claim in one declared source→target direction.**
 
-The primary estimand is the expected recurrence quality and selective-reporting risk for such claims in the audited paired population.
+The primary population is the audited exact-pair population for the relevant dataset/context pair.
 
-### Consequence
+### 6.2 Secondary descriptive estimand — target-recorded emergence
 
-A rule that inspects the target report before deciding whether the claim is portable is **not a deployable CASE baseline**. In particular, strict source/target intersection is useful as a retrospective descriptive reference, but it is not a fair prospective predictor.
+For source-negative cells:
 
----
+\[
+x_{a,j,s}=0,
+\]
+
+report:
+
+\[
+E_j^{s\rightarrow t}
+=
+P(x_{a,j,t}=1 \mid x_{a,j,s}=0).
+\]
+
+This quantity is called **target-recorded emergence** or **target-recorded evidence among source-negative observations**.
+
+It must never be described as proof that the underlying behavior newly appeared, because source non-observation can arise from finite stimulation, observation exposure, instrumentation, parser behavior, or execution stochasticity.
+
+A predictive emergence model is **not** part of the current core roadmap.
+
+### 6.3 Symmetric paired-state estimand
+
+For each claim type, characterize:
+
+```text
+n00 = source absent, target absent
+n01 = source absent, target present
+n10 = source present, target absent
+n11 = source present, target present
+```
+
+These states support disagreement, overlap, directional recurrence, and target-recorded-emergence summaries without forcing a causal interpretation.
+
+### 6.4 Prospective baseline consequence
+
+Any rule that inspects target evidence before deciding whether the source claim is portable is **not** a deployable CASE baseline.
+
+Strict source/target intersection may be shown retrospectively, but it is not a fair prospective competitor.
 
 ## 7. Research questions
 
-### RQ1 — Cross-context recurrence and portability structure
+### RQ1 — Recorded portability structure
 
-**How often, and for which indicators, do recorded behavioral-security observations agree or disagree across the paired Android execution contexts?**
+**How often do paired source and target contexts agree, disagree, or contain target-recorded evidence that was not recorded in the source context?**
 
-RQ1 is intentionally broader than a one-direction conditional recurrence rate. It characterizes the paired context relationship using both directional source-positive recurrence and symmetric paired-context summaries, without attributing observed differences causally to Android OS version alone.
+This includes directional source-positive recurrence and the full `n00/n01/n10/n11` paired structure. It characterizes finite recorded evidence, not behavior truth or causal Android-version effects.
 
-### RQ2 — Source-only recurrence estimation
+### RQ2 — Source-only recurrence signal
 
-**Can source-context information estimate claim recurrence better than simple training-only prevalence and per-indicator persistence baselines?**
+**Do source Boolean indicators and source-run evidence properties estimate target recurrence better than direction-global prevalence, per-indicator persistence, and simple activity/evidence-strength baselines under package-held-out evaluation?**
 
-The primary comparison is probabilistic quality, not malware-detection accuracy.
+The primary comparison uses proper probabilistic scores.
 
-### RQ3 — Evidence-scoping utility
+### RQ3 — Scoping value
 
-**Does CASE improve the selective reporting frontier: lower target non-recurrence among claims labeled cross-context-supported while preserving useful claim coverage?**
+**Does a calibration-only CASE policy reduce target non-recurrence among transferred claims while retaining useful claim and report coverage compared with persistence-based scoping?**
 
-This is the main operational question.
+This is the primary operational question. It must be answered only by the protocol-frozen calibration/test evaluation defined below.
 
-### RQ4 — Heterogeneity, fidelity, and robustness
+### RQ4 — Boundaries and replication
 
-**How stable are recurrence patterns and CASE benefit across direction, indicator, package weighting, report-level aggregation, broad-versus-derived indicator definitions, and fidelity strata?**
+**How stable are recurrence and scoping effects across direction, indicator, package/report aggregation, broad-versus-derived definitions, fidelity/exposure sensitivities, negative controls, and one independently paired context family?**
 
-This determines whether the result is a broad reporting effect or a small artifact of a few common indicators, parser-derived redundancy, or one direction.
+SELENE supplies the primary semantic analysis. KronoDroid supplies the audited secondary context family when its model-level gates pass.
 
 ### 7.1 RQ-to-evidence map
 
-| RQ | Population / unit | Main comparison | Primary evidence | Permitted interpretation |
+| RQ | Main population / unit | Main comparison | Primary evidence | Permitted interpretation |
 |---|---|---|---|---|
-| RQ1 | paired APKs and source-positive claims | descriptive | directional recurrence; `n00/n01/n10/n11`; disagreement; Jaccard; paired prevalence difference; paired-population audit | recorded evidence portability differs across indicators and/or directions in the tested contexts |
-| RQ2 | held-out package-grouped claims | CASE score vs global prevalence and per-indicator persistence | Brier, log loss, Brier skill, paired package-bootstrap deltas | source-only context carries predictive information about recorded recurrence beyond simple priors |
-| RQ3 | same held-out claims and APK reports | CASE selective policy vs persistence ranking / always-generalize | generalized risk-coverage, ordinary AURC, risk at coverage, coverage at risk budget, recurrence retention, report-level scoping metrics | CASE changes the evidence-scoping trade-off |
-| RQ4 | direction, indicator, package, report, and fidelity strata | macro/worst-stratum and predeclared sensitivities | per-indicator metrics, package/report-macro metrics, broad-indicator sensitivity, fidelity sensitivity, broken-pair negative control | benefit/limitations are heterogeneous or robust within this artifact |
+| RQ1 | exact paired APKs; source-positive and source-negative claim cells | descriptive paired structure | `n00/n01/n10/n11`, directional recurrence, target-recorded emergence, disagreement, Jaccard, prevalence difference | recorded evidence portability is heterogeneous in tested contexts |
+| RQ2 | package-held-out source-positive claims | CASE vs global prevalence, persistence, activity, evidence-strength | Brier, log loss, Brier skill, calibration, package-bootstrap deltas | source-only evidence carries incremental recurrence information |
+| RQ3 | untouched OOF claims and reconstructed APK reports | calibration-only CASE policy vs persistence / always-generalize | risk-coverage, AUGRC/AURC, risk at coverage, coverage at risk, recurrence retention, report metrics | CASE changes the selective evidence-transfer trade-off |
+| RQ4 | direction/indicator/report/fidelity/exposure strata plus gated external dataset | predeclared sensitivity and replication | broad-only, duration normalization, broken-pair control, paired-selection audit, external paired recurrence/model replication | identifies boundaries, robustness, and degree of generalizability |
 
----
+Granularity, temporal drift, family OOD, claim OOD, and repeated-run stochasticity remain **named extension questions**, not core RQs, until their validity gates pass.
 
 ## 8. Dataset and provenance contract
 
-### 8.1 Source
+### 8.1 Primary dataset — SELENE / ARTEMIS
 
 Primary dataset: **SELENE Android Paper Artifacts**, derived from ARTEMIS dynamic Android analyses.
 
@@ -252,77 +343,182 @@ Expected CASE source directory:
 
 Raw/external data are immutable and never committed into CASE-Android.
 
-### 8.2 Required source families
+The primary implementation requires the audited compact families:
 
-The initial study requires only the compact released files needed for:
+- `analyses`;
+- `run_features`;
+- `fidelity_oracle`;
+- `fidelity_evidence`.
 
-- `analyses` metadata;
-- `run_features` in Android 10 and Android 14;
-- `fidelity_oracle` and `fidelity_evidence` for provenance/fidelity auditing.
+The current primary study does not require the multi-gigabyte L0.5/L1/lifecycle layers.
 
-Event-level multi-gigabyte tables are not needed for the primary experiment.
-
-### 8.3 Identity and join rules
+### 8.2 SELENE identity and join rules
 
 - APK identity: exact SHA-256.
 - Run identity: released SELENE run identifier.
-- Grouping identity for train/calibration/test separation: `package_name`.
-- Paired context record: exact APK SHA-256 present in both environments.
-- Claims are constructed only after the pair has been validated one-to-one.
-- Package/hash/run identifiers are grouping/provenance variables, **never predictive features**.
+- Train/calibration/test grouping identity: `package_name`.
+- Paired context record: exact APK SHA-256 present in both audited contexts.
+- Claims are constructed only after one-to-one pair validation.
+- Package/hash/run identifiers are grouping/provenance variables, never predictors.
+- The paired population is the explicit inferential population; unpaired observations are used for selection-bias auditing only.
 
-### 8.4 License and citation
+### 8.3 SELENE predictor families
 
-The SELENE artifact is released under the SELENE Paper Artifacts Data License 1.0 and remains subject to the upstream ARTEMIS Dynamic Traces Data License 1.0. Public outputs must follow the citation requirements of both releases. CASE-Android’s MIT license applies only to original CASE-Android code and repository material.
+Primary Boolean source representation:
 
-### 8.5 Sensitive released content
+- the frozen 19 source indicators;
+- one-hot claim identity.
 
-The upstream artifact card warns that recorded malware-controlled endpoints, identifiers, paths, and credential-shaped strings may be present in some artifact families. CASE-Android uses compact Boolean features for the primary study and must not echo raw sensitive strings into logs, tables, figures, or public outputs.
+Secondary predeclared source-side representation ladder may use audited `run_features` fields that pass provenance/leakage review, including:
 
----
+- semantic/event counts;
+- total activity/event volume;
+- source duration and predeclared exposure-normalized count transforms;
+- other source-only evidence-strength fields explicitly allowlisted before frozen evaluation.
 
-## 9. Population and selection-bias audit
+Derived triage/richness scores, raw sensitive strings, identifiers, target fields, labels, and post-target metadata are excluded unless a later roadmap revision proves a distinct valid role.
 
-The paired population is not automatically representative of all SELENE runs. Android 10 has 13,739 unpaired identities while Android 14 has only five unpaired identities. This asymmetry can induce selection bias.
+### 8.4 SELENE license, citation, and sensitive content
 
-Before the protocol-frozen evaluation, run `audit-paired-population`:
+Before protocol freeze, reconcile the live SELENE Paper Artifacts Data License and upstream ARTEMIS Dynamic Traces license/citation requirements. CASE-Android's own repository license applies only to original CASE code/material.
 
-- compare Android-10 paired vs Android-10-only flag prevalences;
-- compare number of positive flags per APK;
-- compare package-group composition where possible;
-- report absolute prevalence differences for every flag;
-- report the largest absolute prevalence difference and macro mean difference;
-- do not infer why an APK is unpaired unless the source metadata supports that explanation.
+The released artifacts may contain malware-controlled endpoints, paths, identifiers, and credential-shaped strings. Raw sensitive strings must not be echoed into logs, tables, figures, or public result artifacts.
 
-This audit does not “correct” the paired population. It defines the population to which the protocol-frozen claims apply and quantifies how selective that population may be.
+### 8.5 Secondary replication dataset — KronoDroid
 
----
+KronoDroid is a **separate secondary dataset**, not a pooled extension of SELENE.
+
+Audited contract:
+
+- pair on exact unique SHA-256;
+- exclude duplicate/conflicting hash identities from the one-to-one paired population;
+- use the 288 aligned syscall-count columns plus `nr_syscalls` only after schema reconciliation;
+- define a syscall-presence claim as `count > 0` for descriptive recurrence;
+- never reinterpret syscall-presence claims as SELENE semantic security indicators;
+- malware/benign labels may be used only for valid descriptive strata, never predictors;
+- family labels are currently unusable for family-OOD because paired labels disagree extensively;
+- APK metadata dates are not execution timestamps and cannot support portability-drift claims.
+
+Before a **model-level** KronoDroid replication is promoted, the workflow must additionally resolve:
+
+1. the 484-column CSV versus public feature-count discrepancy;
+2. the source feature allowlist;
+3. a valid grouping key and split contract;
+4. baseline fairness;
+5. leakage tests;
+6. licensing/citation provenance.
+
+### 8.6 Gated optional datasets
+
+AndroCT, DYNAMISM 2016–2023, CIC-InvesAndMal2019, TraceDroid, and any newly discovered dataset enter only through the validity gates in Section 22. They are not silently substituted for missing primary evidence.
+
+No fresh physical-device or emulator execution campaign is required by this roadmap.
+
+## 9. Population, redundancy, and exposure audits
+
+These audits are **prospective controls**. They define limitations and sensitivities before claim promotion; they are not performance gates.
+
+### 9.1 Paired-population selection audit
+
+The paired population may differ from source-context observations that do not have a valid target pair. Before the frozen evaluation:
+
+- compare paired versus unpaired source-context indicator prevalence where support exists;
+- compare source-positive claim-count distributions per APK;
+- compare package composition where the released metadata permit it;
+- report absolute prevalence differences indicator by indicator;
+- state clearly that primary claims apply to the validated paired population;
+- do not infer the cause of non-pairing without source metadata that supports it.
+
+The audit characterizes external-validity limits. It does not reweight or redefine the primary paired population unless a separate, predeclared sensitivity is added.
+
+### 9.2 Observation-exposure audit
+
+The named contexts may differ in observation duration or other recorded execution-exposure properties. Before interpreting cross-context differences:
+
+- summarize source and target run-duration distributions;
+- identify other source metadata that represent observation exposure and are comparable across contexts;
+- retain raw source evidence counts as one secondary representation;
+- evaluate a predeclared exposure-normalized count sensitivity;
+- avoid causal wording that attributes recurrence differences to Android version or another single context component.
+
+### 9.3 Indicator redundancy audit
+
+The released Boolean ontology may contain duplicate, near-duplicate, or threshold-derived indicators.
+
+The primary analysis retains the full released indicator set for reconciliation and reproducibility, while a **broad/non-derived sensitivity subset** must be defined from source schema semantics before outer-test outcomes are inspected.
+
+The redundancy audit must:
+
+- identify exact duplicates;
+- identify deterministic/threshold-derived indicators where provenance supports that relationship;
+- document the mapping;
+- prohibit target-recurrence-driven indicator removal.
+
+Primary results remain full-ontology results; the subset is a sensitivity only.
+
+### 9.4 Fidelity/provenance audit
+
+Fidelity material is used only to assess parser/provenance behavior where a defensible mapping exists.
+
+The audit must:
+
+- freeze the indicators with an interpretable fidelity mapping;
+- report mapping support and agreement descriptively;
+- keep fidelity outcomes out of recurrence predictors and target labels;
+- avoid treating fidelity material as independent behavior ground truth;
+- use limited support to narrow wording rather than silently dropping difficult indicators.
 
 ## 10. CASE-Android mechanism
 
-### 10.1 Information allowed at decision time
+### 10.1 Decision-time information firewall
 
-For a source-positive claim, the primary CASE scorer may use only:
+For a source-positive claim, every CASE scorer may use **source-side information only**.
 
-- the 19 source-context Boolean indicators;
-- one-hot identity of the claim indicator;
-- the declared source→target direction, by fitting a separate model per direction.
+Primary Boolean scorer:
 
-It may not use:
+- frozen 19 source-context Boolean indicators;
+- one-hot claim identity;
+- separate fitted model per source→target direction.
 
-- any target-context flag;
-- target-context summaries;
-- target run metadata produced after target execution;
-- package name, APK hash, run ID, family label, malware label, or timing identifiers;
-- fidelity-oracle outcomes as a prediction label.
+Secondary rich-source scorer/sensitivities may additionally use predeclared audited source-only fields such as:
 
-### 10.2 Primary recurrence scorer
+- evidence/event counts;
+- total source activity volume;
+- source duration;
+- fixed duration-normalized count transforms.
 
-The primary scorer is intentionally simple:
+Forbidden predictors include:
 
-> **direction-specific pooled L2-regularized logistic regression** with indicator identity and the source Boolean feature vector.
+- any target-context flag/count/summary;
+- target execution metadata;
+- recurrence outcome;
+- package name, SHA-256, run ID;
+- malware/family labels;
+- split/fold identifiers;
+- fidelity outcomes;
+- raw evidence strings;
+- fields whose provenance cannot be shown to exist before target observation.
 
-Default scientific model contract:
+### 10.2 Model ladder
+
+The roadmap does **not** define novelty through model complexity.
+
+Required prospective methods:
+
+1. direction-global prevalence;
+2. per-indicator persistence;
+3. source activity-volume baseline;
+4. **Boolean CASE:** direction-specific pooled L2 logistic using claim identity + 19 source flags;
+5. **evidence-strength comparator:** claim identity + predeclared source count/strength features;
+6. **rich CASE sensitivity:** Boolean + approved count/activity fields;
+7. **duration-normalized rich sensitivity**;
+8. secondary per-indicator logistic when estimable.
+
+Primary scientific scorer:
+
+> **direction-specific pooled L2 logistic with claim identity and the source Boolean vector.**
+
+Default contract:
 
 ```text
 penalty = L2
@@ -331,110 +527,116 @@ max_iter = 1000
 class_weight = None
 ```
 
-These values were already used during exploration. They are frozen before the protocol-frozen evaluation, and there is no hyperparameter search against outer-test outcomes. Because the model family and these settings were informed by earlier work on the same SELENE population, the main evaluation is described as **protocol-frozen post-exploratory out-of-fold evaluation**, not as an independent external confirmation study.
+The richer source representation is a **secondary incremental-value test**. It is evaluated because the available source schema makes the hypothesis feasible, not because it is entitled to outperform the Boolean primary model.
 
-A separate per-indicator logistic model is retained as a **secondary complexity comparator**, not the definition of CASE.
+One nonlinear tabular ceiling comparator may be added later only if the frozen simple ladder leaves a scientifically important unresolved question. Random-forest/boosting/GAM/MLP/sequence tournaments are not part of the core protocol.
 
 ### 10.3 Report-scope policy
 
-The primary CASE output is a **continuous recurrence score** for each source-positive claim. The score is the scientific object; any categorical reporting rule is a readable operating view derived from that score.
+The scientific output is the continuous recurrence probability.
 
-The default two-scope interpretation is:
+The core readable statuses are:
 
-- **`cross-context-supported`** — the score is high enough, under a threshold chosen without using outer-test outcomes, to justify carrying the recorded claim into the named target context.
-- **`source-context-only`** — keep the claim tied to the source context rather than generalizing it. This does **not** mean the behavior is absent in the target context.
+- **`cross-context-supported`** — threshold selected from calibration data supports carrying the recorded source claim into the named target context under that operating policy;
+- **`source-context-only`** — do not generalize the recorded source evidence under that policy.
 
-CASE does **not** require a third `insufficiently-tested` outcome. If an indicator is genuinely too sparse for a reliable stratum-specific estimate, that limitation is reported through its sample/package count, uncertainty interval, and `NA` metric rules rather than converted into an artificial scientific class.
+`source-context-only` never means `target-absent`.
 
-An optional abstention/uncertainty region may be evaluated later as a **secondary sensitivity analysis** if the score calibration shows that it adds useful information. It is not part of the core contribution and is not required for the chapter.
+An optional third defer/abstention state is a separately predeclared sensitivity only.
 
-### 10.4 Operating points are descriptive, not project gates
+### 10.4 Calibration-only operating points
 
-The primary evidence is the complete probability-quality and risk-coverage analysis. Fixed operating points are used to make the trade-off easy to interpret, not to decide whether CASE-Android “passes” or “fails.”
+The full probability-quality and risk-coverage analysis is primary.
 
-The roadmap keeps the exploratory **50% and 80% coverage** views because they are already interpretable from the existing PoC. It may additionally show one or more recurrence-risk targets such as 5% or 10% when the calibration data support them.
+Retain the exploratory 50% and 80% coverage views as predeclared descriptive operating views. Optionally evaluate recurrence-risk targets such as 5% or 10% when the calibration partition supports them.
 
-For each outer fold, any reporting threshold must be chosen from calibration data only after the probability model has been fit on the fold's fit partition. If a requested risk target is not achievable at useful coverage, report that fact and the achievable frontier. Do **not** lower the target after inspecting the outer test set, but also do **not** treat an unavailable operating point as project failure.
+For each outer fold:
 
-A stronger finite-sample risk-control layer may be explored later only as a clearly separated extension. It is not part of the core CASE claim unless its assumptions are explicitly satisfied under package dependence and selective-set evaluation.
+1. fit recurrence models on fit groups only;
+2. estimate persistence/global priors on fit groups only;
+3. choose any threshold/risk operating point from calibration groups only;
+4. freeze the threshold;
+5. score untouched outer-test groups;
+6. if a requested calibration risk target is unavailable, return `NO_OPERATING_POINT`.
 
-### 10.5 Support and sparse-stratum rule
+Do not relax a target after seeing outer-test outcomes.
 
-The term **support gating** means only checking whether a secondary stratum-specific model or metric is mathematically estimable from the fit/calibration partitions. It must never remove claims from the primary 19-indicator population because their outer-test outcomes are inconvenient.
+Formal conformal/LTT/CRC guarantee language is excluded from the core until G13 passes.
 
-Rules:
+### 10.5 Sparse support
 
-- all 19 audited indicators remain in the primary pooled CASE evaluation;
-- sparse indicators remain visible with counts and uncertainty;
-- a secondary per-indicator logistic model may be `NA` when its fit partition is not estimable;
-- an undefined secondary metric/model does not remove that indicator's claims from pooled or descriptive evaluation;
-- all feasibility rules are based on fit/calibration support only, never outer-test outcomes.
+All 19 indicators stay visible in the primary pooled population.
 
-### 10.6 Probability-stability contract
+Sparse support may make a secondary per-indicator model or stratum metric `NA`, but it may not remove primary claims because test outcomes are inconvenient.
 
-For metrics requiring finite probabilities:
+Every `NA` must carry a machine-readable reason and denominator.
 
-- store the raw model probability separately from the evaluation probability;
-- for log loss only, clip evaluation probabilities to `[1e-6, 1 - 1e-6]`;
-- Brier, ranking, and risk-coverage computations use the raw probability unless the metric implementation mathematically requires otherwise;
-- if an indicator has no source-positive fit claims for the per-indicator persistence baseline in a fold, fall back to that direction's global fit-partition recurrence prevalence and mark the fallback in the prediction artifact;
-- secondary per-indicator logistic models that cannot be fit receive `NA` rather than a hidden fallback.
+### 10.6 Probability stability
 
-### 10.7 Adaptive evidence rule
+- Store raw model probability separately from any metric-specific stabilized probability.
+- Clip only for log-loss evaluation, to `[1e-6, 1 - 1e-6]`.
+- Brier/ranking/selective metrics use raw probabilities.
+- If a fit partition contains no source-positive examples for an indicator-specific persistence estimate, fall back to direction-global fit prevalence and record the fallback.
+- Do not silently fall back for per-indicator logistic models; mark them `NA`.
 
-The mechanism, metrics, and claims must stay aligned with what the data actually support:
+### 10.7 Evidence interpretation rule
 
-- if CASE clearly improves probability quality and selective reporting, claim the improvement;
-- if the gain is small but consistent, claim a modest practical improvement;
-- if the gain is directional, make the contribution direction-dependent;
-- if simple persistence is competitive at broad coverage, say so and identify where CASE adds value;
-- if an indicator is too sparse or unstable, report it as a limitation rather than inventing a new class;
-- if a methodological issue is discovered, repair the protocol and regenerate the affected evidence with a new protocol identity.
+- broad, stable improvement → bounded CASE benefit;
+- modest but repeated improvement → modest incremental signal;
+- directional or stratum-specific effect → explicitly conditional claim;
+- persistence parity/superiority → predictive/scoping superiority claim is not supported;
+- failed negative control → stop interpretation and investigate;
+- structural data/provenance/leakage failure → affected lane is blocked;
+- weaker effect never justifies changing metrics or thresholds post hoc.
 
-This flexibility is **not** permission to move thresholds post hoc to manufacture positive results. The adaptation is in the *claim and scope*, not in selectively rewriting the evidence.
-
----
-
-## 11. Baselines and references
+## 11. Baselines, ablations, and retrospective references
 
 ### 11.1 Prospective baselines
 
 **Always-generalize**  
-Every source-positive claim is treated as cross-context-supported. This defines full-coverage recurrence risk.
+Every source-positive claim is carried to the named target context. This defines full-coverage observed non-recurrence risk.
 
 **Direction-global prevalence**  
-Every source-positive claim receives the overall recurrence prevalence estimated from the **fit partition only** for that direction. This is the weakest probabilistic prior and quantifies how much is gained merely by knowing the base rate.
+Assign the fit-partition recurrence prevalence for that direction to every source-positive claim.
 
 **Per-indicator persistence**  
-For each indicator, predict the fit-partition recurrence rate for every source-positive claim of that indicator. This is the principal simple baseline. If an indicator has no source-positive fit claims in a fold, use the declared global-prevalence fallback from Section 10.6 and record the event.
+Assign the fit-partition recurrence prevalence of that claim type. This remains the **principal simple baseline**.
 
 **Activity-volume baseline**  
-Use indicator identity plus only the source report’s total positive-flag count. This tests whether CASE merely exploits “busy apps have more recurring flags.”
+Use claim identity plus only the source report's total positive-flag/activity summary defined in the frozen contract. This tests whether CASE merely learns that “busy” reports recur more.
 
-**CASE pooled logistic**  
-Indicator identity plus the complete source Boolean flag vector. This is the primary method.
+**Evidence-strength-only baseline**  
+Use claim identity plus predeclared source evidence/count-strength fields without the full Boolean context. This tests whether richer CASE is simply a count proxy.
+
+### 11.2 CASE methods
+
+**Boolean CASE**  
+Claim identity + 19 source Boolean flags. This is the primary method.
+
+**Rich CASE sensitivity**  
+Boolean CASE plus predeclared source count/activity fields.
+
+**Duration-normalized rich sensitivity**  
+Same conceptual feature family but with the frozen normalization transform.
 
 **Per-indicator logistic**  
-One simple logistic model per indicator using source flags. This is a secondary comparator to test whether indicator-specific weights are materially necessary.
+Secondary comparator for whether claim-specific weights materially help.
 
-### 11.2 Fair data-budget contract
+### 11.3 Fair data-budget contract
 
-Every learned probabilistic method and learned baseline obeys the same fold-local information budget:
+Every learned method uses the same fold-local label budget:
 
-- **fit groups** may train probability models or estimate recurrence priors;
-- **calibration groups** may select reporting thresholds/risk budgets and support diagnostics, but their target labels may not be used to refit CASE probabilities or persistence estimates;
-- **outer-test groups** may only be scored and evaluated;
-- target labels from calibration or outer-test groups never enter feature selection or model training.
+- fit groups may fit models or recurrence priors;
+- calibration groups may select operating thresholds and run support diagnostics, but target outcomes there do not refit recurrence models or persistence estimates;
+- outer-test groups are evaluation only;
+- feature definitions and transformations are frozen before outer-test inspection;
+- all methods are compared on identical eligible outer-test claim rows.
 
-This prevents CASE from being compared against a persistence baseline that was estimated from more labeled recurrence data than CASE itself was allowed to use.
+### 11.4 Retrospective descriptive reference
 
-### 11.3 Retrospective descriptive reference
+Strict source/target intersection requires the target report and is therefore not a prospective CASE baseline.
 
-**Strict intersection** requires observing both source and target reports. It is therefore not a prospective baseline for CASE. It may be reported only as a descriptive “what would remain if both reports were already available?” reference.
-
-It must never be presented as a deployable competitor in the main predictive comparison.
-
----
+It may appear only as a descriptive upper-conservatism reference after clearly labeling its target access.
 
 ## 12. Protocol-frozen post-exploratory split and evaluation protocol
 
@@ -457,7 +659,8 @@ Before model execution, publish a **fold-balance audit** containing, for each fo
 - package count;
 - paired APK count;
 - source-positive claim count;
-- per-indicator source-positive support;
+- source-negative claim-cell count for the emergence estimand;
+- per-indicator source-positive and source-negative support;
 - source-context positive-flag-count distribution.
 
 The audit is descriptive only. Once the target-label-blind fold manifest is frozen, it must not be regenerated merely because a later outer-test stratum looks inconvenient.
@@ -466,7 +669,7 @@ The audit is descriptive only. Once the target-label-blind fold manifest is froz
 
 Within each outer-training partition, reserve **20% of the outer-training package groups** as a deterministic calibration subset using one fixed calibration seed plus the outer-fold identity. Models fit only the remaining fit groups. Calibration groups are used for:
 
-- CASE risk-budget threshold selection;
+- method-specific risk-budget threshold selection for CASE and persistence-based policies;
 - operating-point selection;
 - support/estimability diagnostics defined in Section 10.5;
 - calibration-partition diagnostics used only to assess threshold stability.
@@ -535,7 +738,10 @@ Derived paired summaries:
 - **paired disagreement rate** `(n01 + n10) / N_paired`;
 - **Jaccard overlap** `n11 / (n11 + n10 + n01)` when defined;
 - **paired prevalence difference** `P(x14=1) - P(x10=1)`;
+- **target-recorded emergence** `n01 / (n00 + n01)` for Android10→14 and `n10 / (n00 + n10)` for Android14→10, when defined;
 - both directional source-positive recurrence rates shown side by side.
+
+Target-recorded emergence is always reported with its source-negative denominator and is never interpreted as proof that the underlying behavior newly began.
 
 These symmetric summaries prevent directional conditioning from being mistaken for a direct OS effect.
 
@@ -545,7 +751,7 @@ These symmetric summaries prevent directional conditioning from being mistaken f
 Primary proper scoring rule for recurrence probability quality.
 
 \[
-BS = rac{1}{N}\sum_i (\hat p_i-y_i)^2.
+BS = \frac{1}{N}\sum_i (\hat p_i-y_i)^2.
 \]
 
 Report paired differences for CASE against both direction-global prevalence and per-indicator persistence; negative is better.
@@ -554,7 +760,7 @@ Report paired differences for CASE against both direction-global prevalence and 
 Secondary effect-size companion:
 
 \[
-BSS_{persist}=1-rac{BS_{CASE}}{BS_{persistence}}.
+BSS_{persist}=1-\frac{BS_{CASE}}{BS_{persistence}}.
 \]
 
 Positive values indicate improvement over persistence. Raw Brier remains the primary proper score.
@@ -591,13 +797,13 @@ For threshold `τ`:
 **Supported coverage**
 
 \[
-C(	au)=rac{\#\{i:\hat p_i\ge	au\}}{N}.
+C(\tau)=\frac{\#\{i:\hat p_i\ge\tau\}}{N}.
 \]
 
 **Supported non-recurrence risk**
 
 \[
-R(	au)=rac{\sum_i \mathbf 1[\hat p_i\ge	au](1-y_i)}{\sum_i \mathbf 1[\hat p_i\ge	au]}.
+R(\tau)=\frac{\sum_i \mathbf 1[\hat p_i\ge\tau](1-y_i)}{\sum_i \mathbf 1[\hat p_i\ge\tau]}.
 \]
 
 This is the main operational error quantity. It must not be renamed malware false-positive rate.
@@ -605,7 +811,7 @@ This is the main operational error quantity. It must not be renamed malware fals
 **Recurrence retention**
 
 \[
-U(	au)=rac{\sum_i \mathbf 1[\hat p_i\ge	au]y_i}{\sum_i y_i}.
+U(\tau)=\frac{\sum_i \mathbf 1[\hat p_i\ge\tau]y_i}{\sum_i y_i}.
 \]
 
 This measures how much genuinely recurrent recorded evidence is retained.
@@ -630,9 +836,11 @@ For each predeclared or calibration-derived operating point report:
 - observed target non-recurrence risk among `cross-context-supported` claims;
 - recurrence retention among supported claims;
 - **absolute risk reduction** versus always-generalize at the same evaluated population;
-- **risk difference** versus persistence at matched coverage;
-- **coverage difference** versus persistence at matched risk where both methods reach the target;
+- **risk difference** versus persistence at the same predeclared/fractionally handled coverage;
+- **coverage difference** versus persistence for the same **calibration-derived risk target**, with each method's threshold selected only on calibration data;
 - package-macro versions of the same measures where meaningful.
+
+Do not search the outer-test risk curves to choose a threshold that retrospectively matches a desired risk. Outer-test curves may be shown descriptively, but policy comparisons at a risk target use calibration-selected thresholds only.
 
 If an optional uncertainty/abstention sensitivity is evaluated, report it separately and do not merge it into the core two-scope results.
 
@@ -713,62 +921,86 @@ The five outer folds are evaluation partitions, not independent replications. Do
 
 ## 16. Main experiments
 
-Only the following core experiments are required initially.
+The following experiments define the prospective evidence plan.
 
 ### `validate-selene-contract`
 
-**Purpose:** prove the data, identities, pairing, indicators, and provenance match the roadmap.  
-**Outputs:** dataset manifest, schema manifest, checksums, join audit, duplicate audit, indicator inventory, paired/unpaired counts.  
-**Completion condition:** no unresolved identity/join ambiguity in the primary population.
+**Purpose:** verify SELENE files, licenses/citations, schemas, checksums, identities, paired population, package groups, predictor provenance, and indicator redundancy.  
+**Outputs:** dataset manifest, checksum manifest, join/duplicate audit, paired/unpaired counts, indicator inventory, source-feature allowlist, redundancy map, fidelity warning.  
+**Completion:** G0–G5 are not failed for the primary dataset.
 
-### `audit-paired-population`
+### `audit-paired-population-and-exposure`
 
-**Purpose:** quantify selection differences between paired and Android-10-only observations.  
-**Outputs:** prevalence-difference table, claim-count distribution, package summary.  
-**Interpretation rule:** there is no performance gate; findings define the population limitation and may narrow the population claim.
+**Purpose:** quantify paired-population selection and context exposure differences before model interpretation.  
+**Outputs:** paired-vs-unpaired prevalence differences, claim/activity distributions, package summaries, context duration/exposure summaries.  
+**Interpretation:** defines external-validity and exposure limitations; no performance gate.
 
 ### `characterize-paired-portability`
 
-**Purpose:** answer the symmetric part of RQ1 before predictive modeling.  
-**Outputs:** per-indicator `n00/n01/n10/n11`, directional recurrence, disagreement, Jaccard, prevalence difference, package-cluster intervals.  
-**Interpretation rule:** this is descriptive portability evidence only; no OS-causal interpretation is permitted.
+**Purpose:** answer RQ1 before predictive modeling.  
+**Outputs:** per-indicator `n00/n01/n10/n11`, both directional recurrence rates, target-recorded emergence, disagreement, Jaccard, paired prevalence difference, support counts, package-cluster intervals.  
+**Interpretation:** recorded-evidence structure only.
 
 ### `reproduce-exploratory-baselines`
 
-**Purpose:** reproduce the known persistence and pooled-logistic exploratory results using the new implementation.  
-**Outputs:** side-by-side reproducibility table against the audited FedIEC numbers.  
-**Completion condition:** unexplained material discrepancies are resolved before the main frozen evaluation; if the historical result was wrong, the corrected result becomes the new reference.
+**Purpose:** verify that the implementation can reproduce the previously used baseline/model contracts before the protocol-frozen evaluation.  
+**Methods:** direction-global prevalence, persistence, activity-volume, Boolean CASE, evidence-strength variants, and the broken-pair diagnostic under a separately identified exploratory configuration.  
+**Outputs:** reproducibility/reconciliation artifact with inputs, split identity, method contract, and discrepancies.  
+**Rule:** exploratory outputs are never merged with or used to tune the frozen outer-test evaluation.
+
+### `evaluate-case-probability`
+
+**Purpose:** answer RQ2 under the frozen five-fold OOF protocol.  
+**Methods:** global prevalence, persistence, activity-volume, evidence-strength-only, Boolean CASE, rich-source sensitivity, exposure-normalized sensitivity, secondary per-indicator logistic.  
+**Primary metrics:** Brier, log loss, paired Brier/log-loss differences versus persistence.  
+**Secondary:** Brier skill, calibration, recurrence/non-recurrence AP.  
+**Outputs:** untouched OOF probabilities and package-bootstrap comparisons.
 
 ### `evaluate-case-scoping`
 
-**Purpose:** answer RQ2 and RQ3 using the frozen five-fold grouped OOF protocol.  
-**Methods:** always-generalize, direction-global prevalence, per-indicator persistence, activity-volume, CASE pooled logistic, secondary per-indicator logistic.  
-**Primary metrics:** Brier difference, log-loss difference, generalized risk-coverage difference.  
-**Secondary metrics:** Brier skill, ordinary AURC, recurrence AP, non-recurrence AP, report-level metrics.  
-**Outputs:** OOF predictions, probability metrics, risk-coverage curves, evidence-scoping-policy tables, report-level tables, package-cluster bootstrap intervals.
+**Purpose:** answer RQ3 using strict fit/calibration/test separation.  
+**Methods:** persistence and CASE operating policies, with always-generalize as a full-coverage reference.  
+**Outputs:** calibration-selected thresholds, untouched-test risk/coverage, AUGRC/AURC, recurrence retention, matched-coverage/matched-risk comparisons, scope assignments, report-level metrics.  
+**Rule:** no threshold is chosen from outer-test outcomes.
 
-### `stress-indicator-direction-and-fidelity`
+### `stress-case-boundaries`
 
-**Purpose:** answer RQ4 and expose hidden dependence on a few indicators, one direction, parser fidelity, or report aggregation.  
-**Analyses:** per-indicator metrics, macro/worst indicator, package-macro, report-macro, Android10→14 vs Android14→10, schema-defined broad-only sensitivity, source-activity baseline comparison, fidelity-stratified sensitivity.  
-**Interpretation rule:** sensitivity findings may narrow or qualify the final claim but must not be used to redefine the primary metrics after the fact.
+**Purpose:** answer the SELENE portion of RQ4.  
+**Analyses:** direction, indicator macro/worst, package/report macro, broad/non-derived sensitivity, raw-vs-normalized count sensitivity, paired-selection audit, duration/exposure summaries, fidelity diagnostics, split sensitivity, and predeclared missing/noise sensitivities where justified.  
+**Rule:** sensitivities qualify claims; they do not redefine the primary population post hoc.
 
 ### `broken-pair-negative-control`
 
-**Purpose:** verify that CASE benefit depends on genuine source-target APK correspondence rather than only marginal indicator prevalence, parser artifacts, or accidental pipeline leakage.  
-**Protocol:** within each frozen outer-test fold and direction, permute complete target-context APK flag vectors across test APKs using a fixed diagnostic seed, thereby preserving the target-context marginal indicator distribution while destroying source-target identity correspondence. Repeat over a predeclared diagnostic set of permutations.  
-**Expected interpretation:** the full source-context feature vector should not show a stable meaningful advantage over simple recurrence priors once genuine pairing is destroyed. A persistent large advantage is an audit flag requiring leakage/parser-shortcut investigation before main claims are accepted.  
-**Claim role:** negative-control diagnostic only; it is not a significance test and cannot rescue weak main results.
+**Purpose:** test whether CASE benefit depends on genuine source-target identity.  
+**Protocol:** within each frozen test fold/direction, permute complete target APK evidence vectors across APKs using a predeclared set of seeds, preserving marginal target distributions while destroying source-target identity.  
+**Expected diagnostic contract:** genuine-pair signal should not survive as a stable substantial CASE advantage after identity correspondence is destroyed.  
+**Failure:** a persistent substantial advantage blocks G9 and requires leakage/shortcut investigation.
 
-Optional second-dataset replication is **not required** for the initial chapter. It becomes a separate experiment only if a lawfully reusable dataset measures a genuinely comparable source-positive recurrence construct.
+### `validate-kronodroid-contract`
 
----
+**Purpose:** validate the secondary dataset before any model-level replication.  
+**Required:** exact unique identity pairing, duplicate policy, aligned dynamic schema, documentation reconciliation, license/citation provenance, source feature allowlist, and valid grouping key.  
+**Failure:** KronoDroid remains descriptive or is excluded.
+
+### `characterize-kronodroid-portability`
+
+**Purpose:** provide a separate external context-family descriptive characterization.  
+**Unit:** exact paired APK × syscall-presence claim.  
+**Outputs:** four-state transitions, both directional recurrence, support-aware syscall summaries, valid descriptive strata, and broken-pair control.  
+**Interpretation:** syscall recorded-evidence recurrence only; do not merge it with SELENE semantic claims.
+
+### `evaluate-kronodroid-scoping`
+
+**Purpose:** test whether the CASE **source-only recurrence/scoping formulation**, rather than merely context instability, replicates in a second context family.  
+**Status:** gated secondary experiment. Run only after G0–G9 and the KronoDroid grouping/source-feature contracts pass.  
+**Methods:** simple fit-only prevalence/persistence baselines plus one source-only pooled logistic formulation appropriate to the frozen syscall claim ontology.  
+**Claim role:** required before broad multi-context/framework-level replication language; not required for a bounded SELENE-only claim.
+
+AndroCT, DYNAMISM, CIC, temporal OOD, family OOD, claim OOD, and formal risk-control experiments remain gated extensions rather than hidden mandatory work.
 
 ## 17. Claim-to-evidence contract
 
-The claim contract keeps the chapter honest without turning every numerical threshold into a kill switch. Results determine the **strength and scope of the claim**.
-
-Use the following evidence labels:
+Use:
 
 ```text
 SUPPORTED
@@ -777,187 +1009,234 @@ NOT_SUPPORTED
 INSUFFICIENT_EVIDENCE
 ```
 
-`NOT_SUPPORTED` means that a particular claim is not justified by the current evidence; it does not automatically invalidate every other descriptive contribution.
+A weak scientific effect narrows the affected claim. A structural validity failure blocks it. Methodological care alone cannot rescue a null predictive/scoping result.
 
-### Claim A — context-specific portability structure exists
+### Claim A — recorded portability heterogeneity
 
-> Recorded SELENE behavioral-security indicators do not exhibit identical portability across the two tested execution contexts.
+> Recorded Android security evidence exhibits heterogeneous recurrence/disagreement across the tested named contexts.
 
-**Evidence:** RQ1 directional recurrence, symmetric paired `n00/n01/n10/n11` structure, disagreement/Jaccard/prevalence differences, and indicator-level distributions.  
-**If strong:** report material and heterogeneous non-recurrence/disagreement.  
-**If weaker:** narrow the statement to the indicators/direction where heterogeneity is observed.  
-**If nearly universal:** do not manufacture heterogeneity; report that simple portability is a strong descriptive baseline for this artifact.  
-**Must not become:** “Android 10 causes behavior X” or “the APK cannot perform X on Android 14.”
+**Required evidence:** paired four-state tables, directional recurrence, per-indicator support/uncertainty, disagreement/overlap, and valid paired-context semantics.  
+**Promotion rule:** promote only to the breadth supported across indicators/directions.  
+**Boundary:** finite processed observations only; no causal context-component claim.
 
-### Claim B — source context contains recurrence signal
+### Claim B — source-only recurrence signal beyond persistence
 
-> Source-context information carries information about recorded target-context recurrence beyond global prevalence and per-indicator persistence.
+> Source-side evidence provides incremental information about target recorded recurrence beyond direction-global and per-indicator persistence priors.
 
-**Primary evidence:** paired OOF Brier and log-loss differences, supported by Brier skill and calibration/ranking diagnostics.
+**Required evidence:** frozen package-held-out Brier/log-loss comparison, paired uncertainty, calibration diagnostics, and broken-pair integrity.  
+**Promotion rule:** `SUPPORTED` only when the frozen comparison consistently improves proper scoring under the declared uncertainty contract; otherwise narrow or reject.
 
-Interpretation:
+### Claim C — evidence strength adds incremental value
 
-- **`SUPPORTED`** — CASE improves proper scoring over persistence in both directions with uncertainty consistent with a real improvement.
-- **`PARTIALLY_SUPPORTED`** — improvement is modest, metric-dependent, indicator-dependent, or directional.
-- **`NOT_SUPPORTED`** — persistence performs as well or better under the valid protocol.
-- **`INSUFFICIENT_EVIDENCE`** — the comparison cannot be interpreted because of a validity/data issue that cannot yet be repaired.
+> Source evidence counts/structure add recurrence information beyond Boolean presence and simple activity volume.
 
-A `PARTIALLY_SUPPORTED` result is acceptable and should directly shape the chapter wording.
+**Required evidence:** raw-count, activity, Boolean, rich, and exposure-normalized ablations on identical frozen rows.  
+**Role:** secondary. If the increment is absent or unstable, remove this contribution without affecting Claims A/B.
 
-### Claim C — CASE improves evidence scoping
+### Claim D — selective CASE scoping improves the trade-off
 
-> CASE provides a more useful recurrence-risk/coverage trade-off than a simple persistence-based policy in at least some practically relevant parts of the frontier.
+> A calibration-only CASE policy provides a better non-recurrence-risk/coverage trade-off than persistence-based scoping in at least some predeclared relevant region of the frontier.
 
-**Primary evidence:** full risk-coverage curves, generalized risk-coverage summary, matched-coverage risk differences, matched-risk coverage differences, recurrence retention, and report-level scoping metrics.
+**Required evidence:** calibration-only operating-point selection, untouched-test evaluation, full risk-coverage comparison, matched-coverage/matched-risk analysis, recurrence retention, and report reconstruction.  
+**Promotion rule:** if no material improvement exists anywhere under the valid protocol, Claim D is `NOT_SUPPORTED`; framework quality cannot rescue it.
 
-Interpretation:
+### Claim E — formal risk-controlled reporting
 
-- broad improvement → claim a general scoping benefit within the tested artifact;
-- improvement only at selective coverage → claim a targeted selective-reporting benefit;
-- improvement only in one direction/indicator family → make the claim explicitly conditional;
-- no material improvement anywhere on the valid frontier → **Claim C is `NOT_SUPPORTED`** and simple persistence is reported as sufficient under the tested conditions.
+> CASE satisfies a formal declared portability-risk guarantee.
 
-The framework vocabulary or the fact that the analysis was carefully audited must **not** be used to rescue Claim C when the predictive/scoping comparison does not improve on persistence. In that case, any remaining chapter contribution must stand separately on Claim A's descriptive portability analysis or another explicitly re-scoped contribution with a new protocol identity.
+**Status:** **GATED / NOT A CORE CLAIM.**  
+It may enter only after G13 passes with a method whose dependence and context-shift assumptions are explicitly justified.
 
-Do not rewrite the operating points after the test outcomes are known.
+### Claim F — evidence granularity versus portability
 
-### Claim D — context-scoped reporting is operationally interpretable
+> Portability changes systematically with evidence abstraction/detail.
 
-> A recurrence score can be converted into a transparent decision about whether to carry a recorded claim into a named target context or keep it source-context-specific.
+**Status:** **GATED EXTENSION.**  
+Requires matched abstraction levels, valid claim mapping, and an authorized comparable dataset/layer.
 
-**Evidence:** threshold/coverage tables, deterministic calibration-only status assignment, and report-level reconstruction metrics.
+### Claim G — report-level reliability proxy
 
-The required core statuses are only:
+> CASE scoping reduces unsupported transferred recorded claims at the reconstructed APK-report level while retaining useful report content.
 
-```text
-cross-context-supported
-source-context-only
-```
+**Required evidence:** calibrated policy, report-macro risk/coverage/failure incidence, persistence comparison, and package/report uncertainty.  
+**Boundary:** offline proxy only; no analyst-time or real-world security-benefit claim.
 
-An uncertainty/abstention state is optional and must earn its place empirically; it is not required for the contribution.
+### Claim H — independent context-family replication
 
-Claim D establishes interpretability of the mechanism, not superiority. It cannot substitute for Claims B or C.
+> The CASE recurrence/scoping formulation shows useful evidence in more than one independently paired Android execution-context family.
 
-### Claim E — PhD implication
+**Required evidence:** model-level external replication with compatible prospective baselines, not merely descriptive context difference.  
+**Promotion rule:** broad multi-context framework language is forbidden until G19 and G20 pass.
 
-> Heterogeneous environments can require reliability-aware handling of shared security evidence, which is relevant to collaborative malware detection under heterogeneous participants.
+### Claim I — portability drift
 
-**Class:** conceptual implication only.  
-No CASE experiment can mark FL or IoT effectiveness as empirically supported.
+> The evidence-portability relationship changes over actual observation time.
 
-### 17.1 Adaptation rule
+**Status:** **GATED EXTENSION.**  
+Requires validated observation timestamps and chronological evaluation.
 
-The discovery work preceding CASE-Android was intentionally extensive so that implementation starts from a feasible, evidence-backed problem rather than from a speculative algorithm. If later audits expose an issue, adapt in the smallest scientifically valid way:
+### Claim J — future-period generalization
 
-1. fix validity problems first;
-2. preserve the original evidence;
-3. revise the protocol identity when a scientific contract changes;
-4. reduce or redirect the claim to match the corrected evidence;
-5. avoid adding complexity merely to rescue a preferred conclusion.
+> CASE retains useful recurrence/scoping performance on later observation periods.
 
-This is the project-wide rule for gates, claims, and sensitivity findings.
+**Status:** **GATED EXTENSION.**  
+Requires verified temporal semantics and a predeclared train-past/test-future protocol.
 
----
+### Claim K — malware-family OOD
+
+> CASE generalizes to malware families excluded from fitting.
+
+**Status:** **GATED EXTENSION.**  
+Requires harmonized family identities and leakage-safe family-grouped evaluation.
+
+### Claim L — unseen-claim OOD
+
+> Contextual source evidence transfers portability signal to evidence kinds excluded from fitting.
+
+**Status:** **GATED EXTENSION.**  
+Requires enough independent claim families to define a meaningful holdout.
+
+### Claim M — context-associated versus same-context stochastic instability
+
+> Cross-context evidence instability exceeds ordinary repeated-run instability under comparable evidence units.
+
+**Status:** **GATED DIAGNOSTIC/EXTENSION.**  
+Requires lawful access to repeated-run data with comparable claim semantics.
+
+### Claim N — target-recorded emergence
+
+> Evidence not recorded in the source context can still be recorded in the target context at claim-dependent rates.
+
+**Required evidence:** source-negative denominators and four-state paired tables.  
+**Role:** descriptive secondary estimand.  
+**Boundary:** never say the underlying behavior itself newly emerged.
+
+### Claim O — PhD implication
+
+> Heterogeneous environments motivate reliability-qualified handling of shared security evidence.
+
+**Class:** conceptual motivation only.  
+No CASE experiment supports FL/IoT effectiveness.
+
+### 17.1 Claim promotion rule
+
+Claims are promoted only after all relevant validity and claim-promotion gates pass.
+
+- A descriptive claim can survive a null predictive result if its own evidence remains valid.
+- Claims B/D cannot survive merely because the framework is methodologically careful if persistence is equally good or better.
+- Claim H requires an external **model-level** replication before broad multi-context language.
+- E/I/J/K/L/M remain outside the core contribution unless their gates are explicitly opened by valid data and a frozen protocol.
+- Any scientific-contract change after freeze creates a new protocol identity.
 
 ## 18. Loopholes and threat controls
 
-This section records the main ways CASE-Android could accidentally overstate its contribution.
-
 | Loophole / threat | Why it matters | Required control |
 |---|---|---|
-| Target leakage | The target context makes recurrence trivial if inspected | strict source-feature allowlist; target-column poison tests |
-| Calling the same-population frozen run “independent confirmation” | exploratory work on SELENE already informed model/analysis choices | describe it as protocol-frozen post-exploratory OOF evaluation; reserve independent confirmation for unseen data |
-| Strict intersection used as a “baseline” | intersection sees the target report | retrospective reference only, never prospective competitor |
-| High recurrence inflates recurrence AP | AP near 1 can look impressive for weak models | Brier/log loss + prevalence + non-recurrence AP + selective-risk metrics are primary/secondary as declared |
-| Baseline gets more recurrence labels than CASE | unfair data budget can make comparisons uninterpretable | fit/calibration/test information budget is identical across learned methods |
-| Undefined “support gating” | could become a hidden post-hoc exclusion rule | support means estimability only; all 19 remain in pooled primary evaluation |
-| Calibration evaluated on calibration data | produces optimistic reliability evidence | headline calibration metrics use outer-test OOF predictions only |
-| Zero/one probabilities or empty fit strata | log loss may explode or baseline behavior becomes ad hoc | predeclared clipping/fallback contract with machine-readable flags |
-| Overlapping random splits | historical seeds are correlated | non-overlapping package-grouped OOF protocol |
-| Claim dependence within APK/package | IID intervals are too narrow | package-grouped splitting and package-cluster bootstrap |
-| Bootstrap interpreted as full retraining uncertainty | OOF prediction bootstrap conditions on fitted models | state the conditional scope; optional predeclared split-sensitivity diagnostic |
-| Rare indicators distributed awkwardly across folds | fold-specific estimability can vary even without leakage | target-label-blind fold-balance audit before execution; no post-outcome refolding |
-| Common indicators dominate micro results | a few frequent flags can hide weak strata | macro-indicator, package-macro, report-macro, and worst-indicator reporting |
-| Derived indicators duplicate broad flags | model can exploit parser redundancy | schema-defined broad-only sensitivity; no test-derived subset |
-| Paired-cohort selection | paired APKs may differ from Android-10-only population | explicit paired-population audit |
-| Direction asymmetry misread as OS causality | source-positive conditioning changes the evaluated cohort | symmetric paired metrics + both directions + no causal language |
-| Same parser in both contexts | correlated parser errors can look like portability | fidelity sensitivity + broad-only sensitivity + no behavior-truth claim |
-| Finite Monkey execution | non-observation may reflect untriggered behavior | target is recorded recurrence, never absence |
-| Threshold tuning on test | creates optimistic status performance | nested calibration groups only |
-| Tie-dependent ranking | row order can change top-coverage baseline | fractional tie handling + row-permutation tests |
-| Data-driven indicator exclusion | post-hoc “non-saturated” subset inflated earlier results | all 19 primary; any subset defined before outer-test outcomes |
-| Activity-volume shortcut | model may learn only that busy reports recur more | dedicated activity-volume baseline |
-| Marginal-frequency/parser shortcut | model may appear useful without genuine APK-level cross-context relation | broken-pair target-report permutation diagnostic |
-| Claim-level success does not imply coherent report behavior | CASE is positioned as a reporting layer | report-level supported fraction, risk, failure incidence, and retention |
-| No independent external replication | generalization beyond SELENE is uncertain | limit claims; optional later replication, not invented |
-| Careful framework used to rescue a null predictive result | methodology alone does not establish CASE benefit | Claims B/C become `NOT_SUPPORTED` when valid baselines are not improved |
-
----
+| Target leakage | Target context trivializes recurrence | strict source-feature allowlist; target-column poison tests |
+| Identity leakage | Hash/package/run fields can memorize recurrence | typed predictor firewall; identity poison tests |
+| Calling the frozen SELENE run independent confirmation | discovery already informed model/problem | call it protocol-frozen/post-exploratory OOF evaluation |
+| High recurrence inflates AP | weak models can look impressive | Brier/log loss first; prevalence/persistence references; non-recurrence AP |
+| Persistence baseline gets more labels | unfair comparison | common fit/calibration/test information budget |
+| Test-selected threshold | optimistic policy | calibration-only selection; `NO_OPERATING_POINT` when needed |
+| Test-selected indicator subset | post-hoc inflation | all 19 primary; broad/non-derived subset frozen from schema |
+| Support gating hides sparse claims | changes population | support controls estimability only; sparse primary claims remain visible |
+| Duplicate/derived indicators | apparent 19-way robustness is overstated | explicit redundancy map + broad/non-derived sensitivity |
+| Paired-population selection | paired APKs differ from unpaired A10 population | regenerate 3.20 pp macro / 8.72 pp max-style selection audit |
+| Unequal observation duration | count/recurrence difference may reflect exposure | report duration; raw vs normalized count sensitivity; no causal version claim |
+| Same parser in both contexts | correlated extraction errors may mimic portability | fidelity/provenance sensitivity; no behavior-truth claim |
+| Fidelity oracle treated as truth | only 56 shared hashes | diagnostic only |
+| Finite Monkey execution | non-observation can be missed trigger | recorded-evidence wording only |
+| Direction asymmetry interpreted causally | source-positive conditioning changes denominator | four-state table + both directions |
+| Activity/count shortcut | richer model may just learn volume | dedicated activity and evidence-strength baselines |
+| Broken pairing still performs | may reveal leakage/marginal shortcut | mandatory multiple broken-pair permutations; block G9 if effect persists |
+| Row-order tie bias | changes fixed-coverage results | fractional ties + permutation tests |
+| Claim/APK dependence | IID CIs too narrow | package-grouped split + package-cluster bootstrap |
+| Bootstrap called full retraining uncertainty | bootstrap conditions on frozen OOF fits | state conditional interpretation; optional split-manifest sensitivity |
+| Report-level proxy oversold | offline reconstruction is not analyst utility | report counts/risk only; no time/security-benefit claim |
+| Krono syscall unit treated as semantic SELENE claim | invalid ontology pooling | separate dataset/result namespace and wording |
+| Krono 484-column schema mismatch ignored | provenance/feature contract may be wrong | resolve before model-level replication |
+| Krono family disagreement ignored | invalid family-OOD split | block family OOD until reconciled |
+| APK metadata dates treated as execution time | false drift/future claim | G15 blocks temporal claims |
+| Broad context instability claimed as novel | well established literature | novelty rests on source-positive recurrence + report scope |
+| Formal risk method applied casually | package/report dependence and shift break guarantees | empirical policy unless G13 passes |
+| Framework rigor used to rescue null result | methodology ≠ predictive utility | B/D become `NOT_SUPPORTED` when valid baselines are not improved |
+| External descriptive replication called model replication | overstates H | H requires source-only model/scoping replication |
 
 ## 19. Literature position and novelty boundary
 
-The targeted audit confirms that the broad neighboring problems are already occupied:
+The novelty audit treats several neighboring findings as already established:
 
-- **A Comparative Study of Android Malware Behavior in Different Contexts (2016)** repeatedly executed malware under different simulation conditions and compared behavioral observations. CASE therefore cannot claim that comparing Android malware behavior across execution contexts is itself novel.
-- **Cross-device behavioral consistency (2022)** shows that Android system-call behavior and malware-detection performance vary across real and virtual devices. CASE cannot claim discovery of environment-dependent behavior.
-- **AndroCT (2021)** provides runtime call traces for Android apps executed on both an emulator and a real device and supports cross-environment behavioral study. CASE therefore cannot claim that paired Android runtime evidence across environment types is novel.
-- **SELENE / ARTEMIS** provides the recorded Android 10/API29 and Android 14/API34 evidence and explicitly states that the artifacts are finite observations, not behavior truth. CASE builds on these artifacts rather than reproducing SELENE’s semantic-compaction contribution.
-- **DYNAMISM 2016–2023 (2026)** includes repeated Android executions and explicitly targets detector stability; its files are restricted. CASE therefore does not claim generic repeatability as novel.
-- **FARO-Droid (2026)** explicitly models per-sample feature reliability for robust Android malware detection under obfuscation. CASE cannot claim generic reliability-aware feature fusion.
-- **Android malware conformal-prediction work (2023)** already addresses uncertainty guarantees for final malware classifications. CASE is not a confidence layer for benign/malicious verdicts.
-- **Selective-classification literature** formalizes accuracy/risk versus coverage and recent work warns that naive risk-coverage evaluation can be misleading. CASE uses this literature for evaluation, not as its novelty claim.
+- Android behavior can vary across execution contexts.
+- emulator/physical-device traces can differ for the same app.
+- Android-version/environment differences are known.
+- behavior abstraction/granularity is an established analysis technique.
+- repeated dynamic executions are not perfectly stable.
+- Android malware classifiers can experience temporal drift.
+- selective prediction, conformal prediction, Learn-Then-Test, and conformal risk control are general methods rather than CASE inventions.
+- reliability-aware Android malware features are an active neighboring area.
 
-### 19.1 Residual novelty target
+Therefore CASE must **not** claim novelty from merely observing instability, using logistic regression, applying selective prediction, or comparing emulator/device behavior.
 
-CASE should not frame novelty around “context dependence,” “reliability,” “Android-version effects,” or “dynamic-analysis instability.” Those spaces are already occupied.
+### 19.1 Residual novelty
 
-The residual contribution is the combination of three narrower objects:
+The defensible novelty is the intersection of:
 
-1. **Claim-portability estimand** — treat one source-positive recorded behavioral-security assertion as context-bound evidence and estimate its recurrence in a named, still-unobserved target context.
-2. **Evidence-scoping mechanism** — use that recurrence estimate to decide whether the assertion is carried into the target-context report or retained as source-context-only.
-3. **Portability/scoping evaluation protocol** — evaluate this decision through proper probability scores, selective risk/coverage, symmetric paired portability, indicator/package/report heterogeneity, provenance/fidelity sensitivity, and negative controls.
+1. **claim-level portability estimand** — one recorded source-positive Android evidence claim is the unit whose recurrence in a named still-unobserved target context is estimated;
+2. **prospective source-only prediction** — target evidence is unavailable at decision time and simple persistence is treated as a serious baseline;
+3. **reliability-qualified report scoping** — recurrence scores determine whether the recorded claim is carried forward or kept source-context-specific;
+4. **selective/report-level evaluation** — proper scores, calibration-only operating policies, risk/coverage, recurrence retention, and reconstructed report behavior;
+5. **validity diagnostics** — four-state paired structure, paired-selection/exposure audit, redundancy/fidelity sensitivity, broken-pair controls;
+6. **bounded context-family replication** — a separate paired dataset may test whether the formulation extends beyond SELENE without pretending the evidence ontologies are identical.
 
-The concise novelty statement is:
+Concise novelty statement:
 
-> **A source-to-target, claim-level evidence-portability and reporting-scope policy for recorded Android behavioral-security assertions, evaluated by recurrence probability quality and selective-reporting risk/coverage without observing the target context at decision time.**
+> **CASE-Android evaluates whether source-context recorded security evidence can support source-only estimates of recurrence in a named unobserved target context and whether those estimates can be used to scope individual report claims with an explicit reliability/coverage trade-off.**
 
-The logistic regression itself is **not** the novelty claim. It is intentionally simple so that any benefit is attributable to the evidence-scoping formulation rather than architectural complexity.
+Do not claim “first” unless a final citation-chaining search immediately before submission supports that wording.
 
-A final literature check before chapter submission should focus on this exact capability: **predicting recurrence of an individual source-positive Android dynamic-analysis claim into a named unobserved target context and using that prediction to scope the report claim**. It should not restart a broad search across all Android malware research.
+### 19.2 Current collision-aware dataset interpretation
 
-### 19.2 Web-verified anchors
+**SELENE / ARTEMIS** supplies the primary versioned-emulator semantic evidence and explicitly frames its traces as finite observations.
 
-- SELENE Android Paper Artifacts: https://huggingface.co/datasets/serrooT/selene-android-paper-artifacts
-- A Comparative Study of Android Malware Behavior in Different Contexts: https://doi.org/10.5220/0005997300470054
-- AndroCT: Ten Years of App Call Traces in Android: https://doi.org/10.1109/MSR52588.2021.00076
-- Cross-device behavioral consistency: https://doi.org/10.1016/j.mlwa.2022.100357
-- FARO-Droid: https://doi.org/10.1016/j.jisa.2026.104503
-- DYNAMISM 2016–2023: https://doi.org/10.5281/zenodo.21280255
-- Android Malware Detection with Unbiased Confidence Guarantees: https://arxiv.org/abs/2312.11559
-- Selective-classification evaluation (NeurIPS 2024): https://doi.org/10.52202/079017-0076
-- Classifier calibration survey: https://doi.org/10.1007/s10994-023-06336-7
+**AndroCT** and **cross-device consistency studies** directly occupy broad emulator/device behavior-difference claims. If AndroCT is later used, CASE novelty must remain the claim-portability/scoping operation or a rigorously matched granularity analysis.
 
----
+**KronoDroid** already supports cross-device/time malware research. CASE uses it only as a separate paired syscall evidence dataset; its value is external recurrence/model replication, not discovery that devices differ.
 
-## 20. Exploratory evidence versus protocol-frozen evaluation
+**DYNAMISM** occupies repeated-run stability as a broad phenomenon; a future CASE use would be to compare same-context and cross-context recurrence under matched evidence units.
 
-### Existing exploratory evidence
+**Selective/risk-control literature** supplies evaluation/method tools. CASE may use them but does not own their methodology.
 
-The historical R5 probes establish feasibility and informed this roadmap. They remain exploratory because they used overlapping random group splits, a narrow baseline set, and some post-hoc sensitivity definitions.
+### 19.3 Final novelty check
 
-They may be reported as development history but not merged with the protocol-frozen OOF estimates.
+Before submission, search specifically for:
 
-### 20.1 Interpretation of the main frozen run
+> prediction of recurrence of an individual source-positive Android dynamic-analysis claim into a named unobserved target context, followed by claim-level report scoping based on that prediction.
 
-The main five-fold OOF evaluation is **protocol-frozen after exploration**. Its purpose is to prevent further test-driven tuning and obtain one coherent held-out prediction for each eligible package under a locked analysis contract.
+Also search citation chains around SELENE/ARTEMIS, AndroCT, cross-device consistency, dynamic-analysis repeatability, selective evidence/reporting, and recent Android feature-reliability work.
 
-It is not independent external confirmation because:
+Search absence is not proof of firstness.
 
-- the SELENE population was already inspected during discovery;
-- the pooled logistic family and fixed `C=1` setting were already used in exploration;
-- the choice of core problem and several evaluation views was informed by exploratory results.
+## 20. Pre-implementation audit versus protocol-frozen evaluation
 
-Therefore manuscript wording should use terms such as:
+### 20.1 Role of pre-implementation audit material
+
+Pre-implementation feasibility, novelty, and dataset-audit materials exist to decide **what belongs in this roadmap**. They must not be merged into the roadmap's future result set or treated as evidence for the final chapter claims.
+
+Their permitted influence is limited to design choices such as:
+
+- which datasets are primary, secondary, gated, or excluded;
+- which estimands are meaningful and feasible;
+- which source-feature families deserve a predeclared ablation;
+- which baselines and negative controls are mandatory;
+- which validity gates must exist;
+- which claims require external replication;
+- which extension lanes should remain deferred.
+
+The authoritative scientific results begin with the protocol-frozen evaluation and any separately frozen external replication.
+
+### 20.2 Interpretation of the main SELENE frozen run
+
+The main five-fold SELENE evaluation is described as:
 
 ```text
 protocol-frozen evaluation
@@ -965,166 +1244,285 @@ locked out-of-fold evaluation
 post-exploratory validation
 ```
 
-and avoid implying a completely untouched confirmatory cohort.
+It is not described as a completely untouched independent confirmation cohort because earlier feasibility work informed the problem formulation and several design choices. Freezing now prevents **further** outcome-driven changes.
 
-### 20.2 Protocol freeze
+### 20.3 Protocol freeze
 
-Before `evaluate-case-scoping` produces main outer-test predictions, freeze and commit:
+Before outer-test predictions are generated, freeze:
 
-- SELENE file identities/checksums;
-- paired-population construction;
-- 19-indicator primary schema;
-- package grouping key;
-- five outer folds and inner calibration groups;
-- fold-balance audit;
-- feature allowlist;
-- logistic model contract;
-- probability clipping and fallback rules;
-- global-prevalence, persistence, activity-volume, and other baseline definitions;
-- any optional operating-point thresholds or risk targets used for categorical reporting;
-- the rule for any optional abstention sensitivity, if such a sensitivity is retained;
-- metric formulas, report-level aggregation, and tie handling;
-- fidelity sensitivity definitions;
-- broken-pair negative-control permutation count/seed;
-- package-cluster bootstrap seed and resample count;
-- claim-interpretation and adaptation rules above.
+- exact SELENE inputs/checksums/licenses;
+- paired population and package groups;
+- primary claim ontology and broad/non-derived sensitivity;
+- source Boolean allowlist;
+- evidence-count/activity allowlist;
+- exposure-normalization formula;
+- model contracts;
+- persistence/global/activity/evidence-strength baselines;
+- five outer folds and calibration groups;
+- support/NA/fallback rules;
+- probability metrics/calibration diagnostics;
+- selective/report-level metric formulas;
+- descriptive coverage points and any calibration-derived risk target;
+- tie handling;
+- paired-population/exposure/fidelity sensitivities;
+- negative-control seeds/count;
+- bootstrap seed/count;
+- claim/gate interpretation contract.
 
-Any later scientific-contract change creates a new protocol identity and cannot silently overwrite the frozen main run.
+Any scientific change after this point creates a new protocol identity.
 
----
+### 20.4 External replication
+
+A bounded SELENE chapter does not require an external model-level replication. However, any claim that CASE generalizes across **different context families** requires a separately frozen secondary-dataset protocol satisfying G19 and G20.
 
 ## 21. Scientific outputs
 
-Every numerical chapter result must have a machine-readable parent.
+Every manuscript-facing numerical result must have a machine-readable parent.
+
+### 21.1 Primary SELENE evidence
 
 Minimum promoted evidence:
 
-1. dataset/provenance table;
-2. paired-population selection audit;
-3. symmetric paired-portability table (`n00/n01/n10/n11`, disagreement, Jaccard, prevalence difference, directional recurrence);
-4. probability-quality comparison table including global prevalence, persistence, and CASE;
-5. calibration table/plot from OOF predictions;
-6. risk-coverage figure for each direction with AUGRC and ordinary AURC;
-7. evidence-scoping table at the declared coverage/risk operating points;
-8. APK/report-level scoping table;
-9. per-indicator and fidelity robustness figure/table;
-10. broken-pair negative-control summary;
-11. claim-support summary with `SUPPORTED`, `PARTIALLY_SUPPORTED`, `NOT_SUPPORTED`, or `INSUFFICIENT_EVIDENCE`.
+1. dataset/provenance/license table;
+2. paired-population selection and run-duration exposure table;
+3. indicator redundancy/broad-sensitivity inventory;
+4. symmetric four-state portability table (`n00/n01/n10/n11`);
+5. directional recurrence and target-recorded-emergence table;
+6. probability-quality comparison: global, persistence, activity, evidence-strength, Boolean CASE, rich sensitivity;
+7. calibration table/plot from untouched OOF predictions;
+8. risk-coverage figure per direction with AUGRC and ordinary AURC;
+9. evidence-scoping table at declared calibration-derived or fixed-coverage views;
+10. APK/report-level scoping table;
+11. per-indicator/package/report and fidelity/exposure robustness outputs;
+12. broken-pair negative-control summary;
+13. package-bootstrap uncertainty table;
+14. claim-support/gate summary.
 
-Figures and chapter tables are generated from validated structured results; values are not manually transcribed into code or configuration.
+### 21.2 Secondary KronoDroid evidence
 
----
+If only the descriptive gates pass:
 
-## 22. Implementation phases and adaptive scientific gates
+- dataset/schema/pair manifest;
+- four-state syscall-presence recurrence;
+- direction-specific recurrence and support;
+- broken-pair comparison;
+- clearly separated malware/benign descriptive strata if label semantics are valid.
 
-The phases below protect correctness and reproducibility. They are not a chain of arbitrary performance hurdles. CASE-Android was selected after extensive feasibility research; when a valid experiment is weaker than expected, the normal action is to adapt the claim or operating scope rather than discard the entire direction.
+If the model-level gates also pass, additionally promote:
 
-### Phase 1 — Foundation and provenance
+- external source-only baseline/CASE probability comparison;
+- external selective-scoping comparison;
+- explicit statement of which Claim H language is supported.
 
-Implement the dataset manifest, schema validation, immutable external-data access, and project configuration.
+### 21.3 Generation rule
 
-**Completion condition:** `validate-selene-contract` reproduces audited identities and fails loudly on mismatched files/schema.
+Figures/tables are generated from validated structured results. No scientific number is manually copied into reporting code or configuration.
 
-### Phase 2 — Canonical paired-claim dataset
+## 22. Validity gates, claim-promotion gates, and implementation phases
 
-Implement exact APK pairing, package grouping, source-positive claim construction, and direction generation.
+CASE uses two distinct gate classes.
 
-**Completion condition:** package leakage is structurally prevented and population counts reconcile with the audit or any discrepancy is explained and documented.
+- **Validity gates** decide whether a dataset/estimand/evaluation is structurally interpretable.
+- **Claim-promotion gates** decide which scientific statements the resulting evidence is allowed to support.
 
-### Phase 3 — Baselines and metric engine
+A weak effect normally narrows a claim. A structural validity failure blocks the affected lane.
 
-Implement always-generalize, direction-global prevalence, persistence, activity-volume, pooled logistic, per-indicator logistic, symmetric portability metrics, proper scores, recurrence/non-recurrence ranking metrics, selective-risk metrics, report-level aggregation, tie handling, and package bootstrap.
+### 22.1 Gate architecture
 
-**Completion condition:** hand-computed fixtures, probability-fallback tests, leakage tests, report-aggregation tests, AUGRC/AURC fixtures, and row-permutation tests pass.
+| Gate | Purpose | PASS requirement | Failure / partial consequence |
+|---|---|---|---|
+| **G0 Access/license** | lawful use and citation/provenance | live terms, licenses, and required citations verified | block only the affected dataset/artifact |
+| **G1 Identity** | exact pair construction | unique source/target identity and duplicate policy | block paired estimand until repaired |
+| **G2 Context semantics** | define what the contrast means | source/target conditions documented and wording bounded | narrow interpretation; no causal component claim |
+| **G3 Claim comparability** | same claim meaning across paired sides | identical or explicitly mapped observation rule within a dataset | drop incompatible claims or dataset lane |
+| **G4 Provenance** | immutable input→output trace | revisions/checksums/transforms recorded | no promoted evidence until traceable |
+| **G5 Leakage** | prospective source-only decision | predictor firewall and poison tests pass | block predictive/scoping claims |
+| **G6 Grouping** | no related identity across roles | one frozen valid grouping/split manifest | rebuild before evaluation |
+| **G7 Support** | sparse-stratum transparency | counts/denominators predeclared; `NA` is not exclusion | keep sparse strata visible; narrow stratum claims |
+| **G8 Baseline fairness** | identical information budget | fit-only priors/models and same evaluation rows | repair comparison before interpretation |
+| **G9 Negative-control integrity** | genuine pairing must matter | broken-pair control behaves as a null/shortcut diagnostic | investigate leakage/shortcut before claim promotion |
+| **G10 Probability quality** | CASE improves recurrence probability | predeclared proper-score comparison supports the claim | Claim B narrows or becomes not supported |
+| **G11 Rich-feature increment** | counts/structure add beyond Boolean/activity | paired incremental comparison survives sensitivities | remove Claim C / keep simpler model |
+| **G12 Selective utility** | policy improves risk/coverage | calibration-only policy evaluated on untouched test | Claim D narrows or becomes not supported |
+| **G13 Formal risk validity** | formal guarantee wording | dependence/shift-valid method and assumptions | use empirical risk/coverage only |
+| **G14 Report-level utility** | policy behaves coherently per APK report | calibrated report metrics vs baseline | keep claim-level only / narrow Claim G |
+| **G15 Temporal OOD** | actual future-period portability | validated observation times + chronological split | no temporal-drift/future claim |
+| **G16 Family OOD** | unseen-family portability | harmonized family labels + grouped split | no family-OOD claim |
+| **G17 Claim OOD** | unseen evidence-kind portability | enough independent claim families | no unseen-claim claim |
+| **G18 Fidelity robustness** | parser/provenance sensitivity | predefined interpretable mapping/strata | qualify artifact-level interpretation |
+| **G19 Independent dataset replication** | external method replication | same prospective recurrence/scoping formulation on another valid dataset | no external replication claim |
+| **G20 Independent context-family replication** | broader than one context type | compatible model-level effect in independent context family | no broad multi-context framework language |
+| **G21 Complexity justification** | complex models must earn cost | stable incremental utility over simpler model | keep simpler model |
+| **G22 Sensitivity robustness** | result not one fragile slice | predeclared direction/indicator/exposure/redundancy/split sensitivities | narrow claim to stable conditions |
+| **G23 Reproducibility** | exact rerun traceability | deterministic CLI/artifacts/provenance | no promoted evidence |
+| **G24 Claim promotion** | final wording | all required gates for a claim pass | mark partial/not supported/insufficient |
 
-### Phase 4 — Exploratory reproduction
+### 22.2 Gate consequence rules
 
-Reproduce the existing FedIEC R5 baseline numbers within explained tolerance.
+1. G0–G6 failure blocks the affected dataset/estimand.
+2. G7–G12 weakness normally narrows the population/method/claim rather than cancelling CASE.
+3. G13 is required **only** for a formal guarantee claim.
+4. G15–G20 are extension/generalization gates; they are not prerequisites to a bounded SELENE result.
+5. Broad multi-context language requires G19/G20 model-level support.
+6. G21 prevents complexity-for-novelty.
+7. G24 never allows a claim to be promoted merely because the methodology is rigorous.
 
-**Completion condition:** differences are reconciled. If a historical result was wrong, preserve that fact and update the starting expectation rather than forcing reproduction.
+### 22.3 Implementation phases
 
-### Phase 5 — Freeze the post-exploratory evaluation protocol
+#### Phase 1 — Foundation and provenance
 
-Persist the outer folds, calibration groups, source-feature contract, model/baseline definitions, metric definitions, and any operating points that will be shown.
+Implement manifests, immutable data access, license/citation recording, schemas, and config.
 
-**Completion condition:** the pre-frozen-evaluation checklist is complete and the protocol no longer depends on unseen outer-test outcomes.
+**Completion:** G0–G5 are not failed for SELENE.
 
-### Phase 6 — Main CASE evaluation
+#### Phase 2 — Canonical paired evidence
 
-Run `characterize-paired-portability`, `evaluate-case-scoping`, `stress-indicator-direction-and-fidelity`, and `broken-pair-negative-control`.
+Implement exact pairing, package grouping, source-positive claims, source-negative cells for emergence, four-state transitions, source feature families, paired/unpaired audit, and exposure audit.
 
-**Completion condition:** all OOF predictions, paired-portability outputs, metrics, uncertainty intervals, report-level scoping decisions, fidelity sensitivities, and negative-control outputs validate.
+**Completion:** all canonical identities and transformation contracts validate.
 
-The result is then interpreted according to the claim contract:
+#### Phase 3 — Splits, baselines, metrics, and negative controls
 
-- broad improvement → broad but bounded claim;
-- modest improvement → modest claim;
-- directional/stratum-specific improvement → conditional claim;
-- simple baseline parity → report the parity and narrow the contribution;
-- structural validity failure → repair/re-scope before interpretation.
+Implement five-fold package OOF, calibration groups, global/persistence/activity/evidence-strength baselines, Boolean/rich model ladder, paired metrics, selective/report metrics, broken-pair control, and package bootstrap.
 
-### Phase 7 — Chapter evidence
+**Completion:** fixtures, leakage, tie, NA, and negative-control implementation tests pass.
 
-Promote only validated outputs needed by the chapter.
+#### Phase 4 — Exploratory reproducibility check
 
-**Completion condition:** every manuscript-facing number traces to an immutable result artifact and every statement stays within the claim-to-evidence contract.
+Reproduce the separately identified exploratory baseline/model contracts only to validate implementation continuity.
 
----
+**Completion:** material discrepancies are understood; no exploratory outcome changes the frozen protocol automatically.
+
+#### Phase 5 — Protocol freeze
+
+Persist the full scientific contract before main outer-test inference.
+
+**Completion:** Section 23 checklist passes.
+
+#### Phase 6 — Main SELENE evaluation
+
+Run paired characterization, frozen probability evaluation, calibration-only scoping, boundary sensitivities, and negative controls.
+
+**Completion:** all required structured evidence validates and claims are assigned according to Section 17.
+
+#### Phase 7 — Secondary KronoDroid replication
+
+First resolve G0–G9 for model-level use. Run descriptive portability characterization after its dataset contract passes; run model/scoping replication only after the grouping and source-feature contracts are frozen.
+
+**Completion:** any external-replication claim is assigned according to G19/G20.
+
+#### Phase 8 — Chapter evidence
+
+Promote only validated tables/figures/results needed by supported or partially supported claims.
 
 ## 23. Final pre-frozen-evaluation checklist
 
-The main protocol-frozen OOF run must not begin until every item is true:
+The main SELENE protocol-frozen OOF run must not begin until every applicable item is true:
 
-- [ ] SELENE source revision and local checksums recorded.
-- [ ] Dataset license/citation requirements recorded.
-- [ ] Exact paired population reproduced.
-- [ ] Paired-vs-unpaired selection audit completed.
-- [ ] Symmetric paired-portability formulas validated.
+### Dataset / provenance
+
+- [ ] SELENE source revision and exact checksums recorded.
+- [ ] Live SELENE + ARTEMIS license/citation requirements reconciled.
+- [ ] Exact paired population regenerated from the frozen identity/join contract and discrepancies from the source manifest explained.
+- [ ] Paired-vs-unpaired selection audit regenerated.
+- [ ] Context run-duration/exposure audit regenerated.
 - [ ] All 19 primary indicators frozen.
-- [ ] Any broad-only sensitivity subset defined from schema semantics only.
-- [ ] Fidelity mappings/sensitivity definitions frozen independently of recurrence outcomes.
-- [ ] Package grouping validated with zero cross-partition leakage.
-- [ ] Five outer folds persisted; each package is test exactly once.
-- [ ] Fold-balance audit generated without using target recurrence labels to alter folds.
-- [ ] Inner calibration groups persisted.
-- [ ] Feature allowlist contains no target-context or identity fields.
-- [ ] Primary CASE model contract frozen.
-- [ ] Direction-global prevalence, persistence, activity-volume, and secondary baselines frozen.
-- [ ] Fair fit/calibration/test data-budget contract verified for every learned method.
-- [ ] `support gating` verified to mean estimability only and incapable of removing primary pooled claims.
-- [ ] Probability clipping and zero-support fallback rules frozen and tested.
-- [ ] Any categorical operating points to be reported are defined from calibration evidence only.
-- [ ] Any optional uncertainty/abstention sensitivity is predeclared separately from the core two-scope policy.
-- [ ] Brier, Brier skill, log loss, AUGRC, ordinary AURC, coverage/risk, recurrence-retention, recurrence AP, and non-recurrence AP formulas tested.
-- [ ] Headline calibration metrics are wired to OOF test predictions, not calibration predictions.
-- [ ] Report-level supported fraction, report risk, report failure incidence, and report retention formulas tested.
-- [ ] Tie handling verified under row permutation.
-- [ ] Package-cluster bootstrap implementation verified on known fixtures and documented as conditional on frozen OOF fits.
-- [ ] Broken-pair negative-control permutation seed/count frozen and implementation validated.
-- [ ] Undefined-metric rules tested.
-- [ ] Claim interpretation rules frozen; effect strength may change claim strength but not metric definitions.
-- [ ] Existing exploratory results clearly separated from the protocol-frozen evaluation.
-- [ ] Main manuscript terminology does not imply an untouched external confirmatory cohort.
-- [ ] Claim C cannot survive solely because the framework is methodologically careful if persistence is not improved.
-- [ ] No FL/IoT, malware-truth, OS-causal, universal-portability, or analyst-benefit claim appears in the planned outputs.
+- [ ] Duplicate/derived indicator inventory frozen.
+- [ ] Broad/non-derived sensitivity subset frozen from source schema only.
+- [ ] Fidelity mapping/sensitivity definition frozen independently of recurrence outcomes.
 
----
+### Estimands
+
+- [ ] Source-positive recurrence construction validated.
+- [ ] Source-negative target-recorded-emergence construction validated.
+- [ ] `n00/n01/n10/n11` definitions and direction mapping tested.
+- [ ] Non-observation wording cannot be rendered as behavior absence.
+- [ ] Report-level aggregation population/denominators frozen.
+
+### Features / models / baselines
+
+- [ ] Boolean source-feature allowlist frozen.
+- [ ] Evidence count/activity allowlist frozen.
+- [ ] Duration-normalization formula frozen.
+- [ ] No target/context-future/identity/label field can enter predictors.
+- [ ] Primary pooled L2 logistic contract frozen.
+- [ ] Global prevalence, persistence, activity-volume, evidence-strength, Boolean CASE, rich, normalized, and secondary per-indicator contracts frozen.
+- [ ] All learned methods obey the same label/information budget.
+- [ ] Probability clipping and zero-support fallback rules frozen.
+
+### Splits / policy
+
+- [ ] Package grouping validated with zero cross-role leakage.
+- [ ] Five target-label-blind outer folds persisted.
+- [ ] Every package is outer-test exactly once.
+- [ ] Fold-balance audit generated without refolding from outcomes.
+- [ ] Inner calibration groups persisted.
+- [ ] Categorical operating points are calibration-only.
+- [ ] 50%/80% descriptive views and any risk targets are predeclared.
+- [ ] `NO_OPERATING_POINT` behavior tested.
+- [ ] No formal guarantee language is enabled unless G13 independently passes.
+
+### Metrics / uncertainty
+
+- [ ] Brier, log loss, Brier skill, calibration intercept/slope, recurrence/non-recurrence AP tested.
+- [ ] Four-state, recurrence, emergence, disagreement, Jaccard, prevalence-difference formulas tested.
+- [ ] AUGRC and ordinary AURC validated against fixtures/reference.
+- [ ] Risk, coverage, recurrence retention, matched-coverage/risk rules tested.
+- [ ] Report supported fraction, report non-recurrence, report-any-failure, and report retention tested.
+- [ ] Tie handling is invariant to row order.
+- [ ] Undefined metrics emit typed `NA` reasons.
+- [ ] Package-cluster bootstrap uses frozen package resampling and paired method differences.
+
+### Negative controls / sensitivities
+
+- [ ] Broken-pair permutation count/seeds frozen.
+- [ ] Broken-pair implementation permutes complete target APK evidence blocks.
+- [ ] Broad/non-derived sensitivity implemented.
+- [ ] Raw-versus-duration-normalized count sensitivity implemented.
+- [ ] Selection/exposure/fidelity sensitivities wired.
+- [ ] Any split-manifest sensitivity is target-label-blind and cannot be used to choose the preferred result.
+
+### Claims / interpretation
+
+- [ ] Pre-implementation/exploratory artifacts remain separate from frozen scientific results.
+- [ ] Main manuscript terminology says protocol-frozen/post-exploratory, not untouched external confirmation.
+- [ ] Claim B fails/narrows if persistence is not improved.
+- [ ] Claim D fails/narrows if calibrated selective utility does not improve.
+- [ ] Claim E remains absent unless G13 passes.
+- [ ] Claim N uses “target-recorded emergence,” never behavior emergence.
+- [ ] No OS-causal, behavior-truth, universal-portability, analyst-benefit, FL, or IoT empirical claim appears.
+
+### External replication
+
+These do not block the bounded SELENE run, but must be satisfied before a Krono model-level replication:
+
+- [ ] KronoDroid exact dataset revision/checksums recorded.
+- [ ] Clean unique-pair logic regenerated from the frozen KronoDroid identity/duplicate contract.
+- [ ] Current artifact schema reconciled with the public/documented schema before model-level use.
+- [ ] Valid Krono grouping key and split contract frozen.
+- [ ] Krono source-feature allowlist and baselines frozen.
+- [ ] Family labels excluded from OOD claims unless reconciled.
+- [ ] APK metadata dates excluded from temporal claims unless execution semantics are proven.
+- [ ] SELENE and Krono claim ontologies remain separate in outputs.
 
 ## 24. Roadmap authority
 
 This document is the scientific source of truth for CASE-Android.
 
-`technical_doc.md` may determine **how** the software implements this roadmap, but it may not redefine:
+`technical_doc.md` determines **how** software implements this roadmap, but it may not silently redefine:
 
-- the estimand;
-- the population;
-- feature availability;
-- baselines;
-- split semantics;
-- metrics;
-- report-level aggregation;
-- fidelity sensitivity and negative-control semantics;
+- dataset roles or validity-gate status;
+- paired populations and identity rules;
+- recurrence/emergence estimands;
+- claim ontologies;
+- source feature availability;
+- baselines and model ladder;
+- split/calibration semantics;
+- probability, selective, report, and uncertainty metrics;
+- negative-control semantics;
 - evidence-scoping policy;
-- claim boundaries and adaptation rules.
+- external replication boundaries;
+- claim-promotion gates or wording boundaries.
 
-If implementation reveals that a scientific contract is infeasible or incorrect, update this roadmap explicitly before changing the scientific behavior of the code.
+If implementation reveals that a scientific contract is infeasible or incorrect, update this roadmap explicitly, create a new protocol identity where necessary, and preserve the historical evidence rather than silently changing scientific behavior.
+
