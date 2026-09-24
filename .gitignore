@@ -15,3 +15,7 @@ data/
 outputs/
 results/
 /temp/
+
+# research POC workspaces
+docs/poc/
+docs/Candidate */poc/

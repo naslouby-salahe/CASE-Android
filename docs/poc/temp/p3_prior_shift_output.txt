@@ -1,9 +1,0 @@
-n=300 fedavg     | fixed: BA 0.821 worstFPR 0.392 | prior: BA 0.773 worstFPR 0.729 | local: BA 0.834 worstFPR 0.322
-n=300 fedavg_ft  | fixed: BA 0.819 worstFPR 0.505 | prior: BA 0.769 worstFPR 0.801 | local: BA 0.843 worstFPR 0.369
-n=300 central    | fixed: BA 0.842 worstFPR 0.403 | prior: BA 0.797 worstFPR 0.686 | local: BA 0.855 worstFPR 0.305
-n=1000 fedavg     | fixed: BA 0.847 worstFPR 0.324 | prior: BA 0.802 worstFPR 0.636 | local: BA 0.864 worstFPR 0.253
-n=1000 fedavg_ft  | fixed: BA 0.850 worstFPR 0.442 | prior: BA 0.793 worstFPR 0.725 | local: BA 0.872 worstFPR 0.239
-n=1000 central    | fixed: BA 0.872 worstFPR 0.353 | prior: BA 0.838 worstFPR 0.533 | local: BA 0.888 worstFPR 0.217
-n=5000 fedavg     | fixed: BA 0.891 worstFPR 0.246 | prior: BA 0.856 worstFPR 0.424 | local: BA 0.901 worstFPR 0.169
-n=5000 fedavg_ft  | fixed: BA 0.900 worstFPR 0.309 | prior: BA 0.868 worstFPR 0.489 | local: BA 0.916 worstFPR 0.154
-n=5000 central    | fixed: BA 0.907 worstFPR 0.279 | prior: BA 0.878 worstFPR 0.446 | local: BA 0.921 worstFPR 0.137
