@@ -1,0 +1,83 @@
+## threshold scope (config A, mean over 5 seeds): meanBA / worstFPR / FPR-sd   [arm fedavg_ft]
+A n=  100 | fixed: 0.788/0.579/0.196 | global: 0.790/0.566/0.192 | local: 0.809/0.420/0.121 | shrunk: 0.796/0.537/0.179 
+A n=  300 | fixed: 0.819/0.505/0.182 | global: 0.822/0.470/0.171 | local: 0.843/0.369/0.108 | shrunk: 0.829/0.442/0.157 
+A n= 1000 | fixed: 0.850/0.442/0.167 | global: 0.851/0.438/0.166 | local: 0.872/0.239/0.071 | shrunk: 0.865/0.341/0.120 
+A n= 5000 | fixed: 0.900/0.309/0.118 | global: 0.902/0.283/0.109 | local: 0.916/0.154/0.049 | shrunk: 0.915/0.179/0.059 
+B n=  100 | fixed: 0.769/0.605/0.191 | global: 0.769/0.629/0.200 | local: 0.800/0.459/0.129 | shrunk: 0.780/0.597/0.183 
+B n=  300 | fixed: 0.809/0.541/0.178 | global: 0.812/0.582/0.192 | local: 0.836/0.337/0.095 | shrunk: 0.823/0.513/0.164 
+B n= 1000 | fixed: 0.850/0.460/0.156 | global: 0.848/0.515/0.172 | local: 0.870/0.265/0.077 | shrunk: 0.864/0.383/0.122 
+B n= 5000 | fixed: 0.900/0.322/0.109 | global: 0.899/0.360/0.121 | local: 0.916/0.148/0.043 | shrunk: 0.915/0.186/0.054 
+## same for fedavg
+A n=  100 | fixed: 0.783/0.516/0.165 | global: 0.782/0.504/0.162 | local: 0.804/0.415/0.121 | shrunk: 0.788/0.480/0.148 
+A n=  300 | fixed: 0.821/0.392/0.129 | global: 0.818/0.419/0.133 | local: 0.834/0.322/0.093 | shrunk: 0.825/0.391/0.119 
+A n= 1000 | fixed: 0.847/0.324/0.104 | global: 0.849/0.315/0.102 | local: 0.864/0.253/0.076 | shrunk: 0.856/0.281/0.084 
+A n= 5000 | fixed: 0.891/0.246/0.080 | global: 0.890/0.270/0.087 | local: 0.901/0.169/0.049 | shrunk: 0.901/0.182/0.048 
+## transfer matrix (config A, n=5000, mean over seeds) & negative transfer
+['1mobile', 'PlayDrone', 'angeeks', 'anzhi', 'appchina', 'play', 'slideme']
+[[0.99 0.6  0.91 0.71 0.71 0.67 0.96]
+ [0.97 0.97 0.89 0.67 0.74 0.79 0.95]
+ [0.97 0.6  0.97 0.71 0.72 0.71 0.93]
+ [0.94 0.57 0.85 0.94 0.86 0.62 0.87]
+ [0.98 0.76 0.94 0.88 0.93 0.73 0.95]
+ [0.97 0.9  0.77 0.73 0.85 0.95 0.93]
+ [0.98 0.69 0.82 0.52 0.61 0.69 0.99]]
+pairs AUC<0.6: [('angeeks', 'PlayDrone', np.float64(0.6)), ('anzhi', 'PlayDrone', np.float64(0.57)), ('slideme', 'anzhi', np.float64(0.52))]
+off-diag AUC min/median/max 0.5203223964192663 0.8041583213237047 0.9804083688345038 diag mean 0.9616320424661623
+## per-client fedavg_ft - local BA gain (A, n=1000) mean over seeds
+1mobile ft-local 0.001 fedavg-local 0.003 shrink-local 0.007 central-fedavg -0.002
+PlayDrone ft-local -0.034 fedavg-local -0.05 shrink-local -0.002 central-fedavg 0.044
+angeeks ft-local -0.006 fedavg-local -0.01 shrink-local -0.001 central-fedavg 0.024
+anzhi ft-local -0.012 fedavg-local -0.033 shrink-local 0.021 central-fedavg 0.036
+appchina ft-local -0.019 fedavg-local -0.012 shrink-local -0.003 central-fedavg 0.019
+play ft-local 0.007 fedavg-local -0.014 shrink-local 0.017 central-fedavg 0.029
+slideme ft-local -0.004 fedavg-local -0.006 shrink-local 0.009 central-fedavg 0.017
+
+## abstention (fedavg/local, seeds 1-4): scope, cov target -> mean coverage, mean err, worst-client err
+('fedavg', 0.6, 'client') cov 0.594 covsd 0.031 err 0.037 worst-client err 0.076
+('fedavg', 0.6, 'global') cov 0.596 covsd 0.121 err 0.037 worst-client err 0.066
+('fedavg', 0.8, 'client') cov 0.795 covsd 0.023 err 0.059 worst-client err 0.12
+('fedavg', 0.8, 'global') cov 0.8 covsd 0.069 err 0.057 worst-client err 0.105
+('fedavg', 0.9, 'client') cov 0.9 covsd 0.018 err 0.079 worst-client err 0.145
+('fedavg', 0.9, 'global') cov 0.899 covsd 0.035 err 0.078 worst-client err 0.131
+('fedavg_ft', 0.6, 'client') cov 0.595 covsd 0.028 err 0.028 worst-client err 0.055
+('fedavg_ft', 0.6, 'global') cov 0.596 covsd 0.148 err 0.025 worst-client err 0.038
+('fedavg_ft', 0.8, 'client') cov 0.8 covsd 0.025 err 0.046 worst-client err 0.087
+('fedavg_ft', 0.8, 'global') cov 0.802 covsd 0.095 err 0.044 worst-client err 0.066
+('fedavg_ft', 0.9, 'client') cov 0.899 covsd 0.019 err 0.062 worst-client err 0.122
+('fedavg_ft', 0.9, 'global') cov 0.898 covsd 0.052 err 0.061 worst-client err 0.097
+
+## robust aggregation (seeds 1-4): mean honest BA, worst honest BA, per-client flags
+('krum', '1mobile') honestBA 0.711 worst 0.582 flags [0.0, 0.0, 0.73, 0.0, 0.0, 0.0, 0.28]
+('krum', None) honestBA 0.744 worst 0.585 flags [0.4, 0.0, 0.44, 0.0, 0.0, 0.0, 0.16]
+('krum', 'appchina') honestBA 0.758 worst 0.579 flags [0.4, 0.0, 0.46, 0.0, 0.0, 0.0, 0.14]
+('krum', 'play') honestBA 0.773 worst 0.61 flags [0.44, 0.0, 0.44, 0.0, 0.0, 0.0, 0.12]
+('mean', '1mobile') honestBA 0.825 worst 0.72 flags 
+('mean', None) honestBA 0.845 worst 0.746 flags 
+('mean', 'appchina') honestBA 0.837 worst 0.714 flags 
+('mean', 'play') honestBA 0.835 worst 0.752 flags 
+('median', '1mobile') honestBA 0.822 worst 0.737 flags [386.82, 265.94, 221.48, 391.15, 407.19, 513.84, 235.9]
+('median', None) honestBA 0.838 worst 0.746 flags [203.14, 267.74, 227.11, 398.69, 417.08, 520.9, 224.39]
+('median', 'appchina') honestBA 0.831 worst 0.672 flags [211.38, 260.05, 201.71, 411.63, 630.36, 532.33, 214.53]
+('median', 'play') honestBA 0.841 worst 0.764 flags [210.6, 283.83, 214.7, 386.75, 421.27, 716.02, 231.04]
+('trimmed', '1mobile') honestBA 0.828 worst 0.75 flags [0.25, 0.22, 0.24, 0.42, 0.2, 0.37, 0.29]
+('trimmed', None) honestBA 0.842 worst 0.739 flags [0.15, 0.24, 0.26, 0.46, 0.24, 0.4, 0.25]
+('trimmed', 'appchina') honestBA 0.843 worst 0.728 flags [0.11, 0.23, 0.25, 0.49, 0.26, 0.43, 0.23]
+('trimmed', 'play') honestBA 0.839 worst 0.76 flags [0.13, 0.24, 0.24, 0.46, 0.26, 0.41, 0.26]
+
+## cold start (seeds 1-4), mean BA / worst-client BA / mean FPR by method and k
+(20, 'global|fixed') BA 0.786 worst 0.611 FPR 0.181
+(20, 'global|ft') BA 0.825 worst 0.692 FPR 0.171
+(20, 'global|kshot_thr') BA 0.771 worst 0.601 FPR 0.331
+(20, 'local_kshot') BA 0.755 worst 0.670 FPR 0.252
+(20, 'nearest3|fixed') BA 0.774 worst 0.599 FPR 0.168
+(20, 'nearest3|kshot_thr') BA 0.774 worst 0.624 FPR 0.286
+(20, 'route3|fixed') BA 0.785 worst 0.640 FPR 0.187
+(20, 'route3|kshot_thr') BA 0.789 worst 0.675 FPR 0.281
+(100, 'global|fixed') BA 0.786 worst 0.611 FPR 0.181
+(100, 'global|ft') BA 0.841 worst 0.739 FPR 0.162
+(100, 'global|kshot_thr') BA 0.789 worst 0.665 FPR 0.249
+(100, 'local_kshot') BA 0.830 worst 0.782 FPR 0.183
+(100, 'nearest3|fixed') BA 0.774 worst 0.599 FPR 0.168
+(100, 'nearest3|kshot_thr') BA 0.795 worst 0.674 FPR 0.240
+(100, 'route3|fixed') BA 0.789 worst 0.617 FPR 0.180
+(100, 'route3|kshot_thr') BA 0.812 worst 0.680 FPR 0.207

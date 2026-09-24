@@ -1,0 +1,34 @@
+LAMDA malware rows in 7 markets 266446  distinct families 111758
+top 15 families: {'dowgin': 29352, 'kuguo': 18296, 'airpush': 14150, 'dnotua': 9393, 'gappusin': 7376, 'smsreg': 6498, 'adwo': 5082, 'leadbolt': 4805, 'revmob': 4469, 'inmobi': 4436, 'youmi': 3413, 'unknown': 2692, 'plankton': 2644, 'zdtad': 2607, 'domob': 1947}
+share SINGLETON/empty/unknown: {'SINGLETON': 0.0, '': 0.0, 'unknown': 0.01, 'none': 0.0}  top-5 concentration 0.295
+families with >=150 samples in >=4 markets: 4
+mk        1mobile  PlayDrone  angeeks  ...  appchina  play.google.com  slideme
+fam                                    ...                                    
+airpush      1099        440      139  ...      2054             9485      636
+gappusin       31         18      223  ...      5374              174        8
+leadbolt      145        378        5  ...       423             3382      398
+plankton      954         64        3  ...       203              999      417
+
+[4 rows x 7 columns]
+malware family purity check: rows with family=="benign" among label 1: 0
+
+N-BaIoT files per device:
+  Danmini_Doorbell                           benign  49548 attack types 10: ['ack', 'combo', 'junk', 'scan', 'scan', 'syn', 'tcp', 'udp', 'udp', 'udpplain']
+  Ecobee_Thermostat                          benign  13113 attack types 10: ['ack', 'combo', 'junk', 'scan', 'scan', 'syn', 'tcp', 'udp', 'udp', 'udpplain']
+  Ennio_Doorbell                             benign  39100 attack types 5: ['combo', 'junk', 'scan', 'tcp', 'udp']
+  Philips_B120N10_Baby_Monitor               benign 175240 attack types 10: ['ack', 'combo', 'junk', 'scan', 'scan', 'syn', 'tcp', 'udp', 'udp', 'udpplain']
+  Provision_PT_737E_Security_Camera          benign  62154 attack types 10: ['ack', 'combo', 'junk', 'scan', 'scan', 'syn', 'tcp', 'udp', 'udp', 'udpplain']
+  Provision_PT_838_Security_Camera           benign  98514 attack types 10: ['ack', 'combo', 'junk', 'scan', 'scan', 'syn', 'tcp', 'udp', 'udp', 'udpplain']
+  Samsung_SNH_1011_N_Webcam                  benign  52150 attack types 5: ['combo', 'junk', 'scan', 'tcp', 'udp']
+  SimpleHome_XCS7_1002_WHT_Security_Camera   benign  46585 attack types 10: ['ack', 'combo', 'junk', 'scan', 'scan', 'syn', 'tcp', 'udp', 'udp', 'udpplain']
+  SimpleHome_XCS7_1003_WHT_Security_Camera   benign  19528 attack types 10: ['ack', 'combo', 'junk', 'scan', 'scan', 'syn', 'tcp', 'udp', 'udp', 'udpplain']
+
+SciDB conditions per device (raw rows / unique windows):
+  dev0 {np.int64(0): '2325/465', np.int64(1): '2400/480', np.int64(2): '1775/355', np.int64(3): '2365/473', np.int64(4): '2365/473', np.int64(5): '2390/478', np.int64(6): '2395/479', np.int64(7): '2028/358', np.int64(8): '2405/481'}
+  dev1 {np.int64(0): '2285/457', np.int64(1): '2420/484', np.int64(2): '2820/235', np.int64(3): '2355/471', np.int64(4): '2365/473', np.int64(5): '2390/478', np.int64(6): '2370/474', np.int64(7): '2360/472', np.int64(8): '2400/480'}
+  dev2 {np.int64(0): '2395/479', np.int64(1): '2400/480', np.int64(2): '2400/480', np.int64(3): '2400/480', np.int64(4): '2255/451', np.int64(5): '2400/480', np.int64(6): '2400/480', np.int64(7): '2375/475', np.int64(8): '2395/479'}
+  dev3 {np.int64(0): '2400/480', np.int64(1): '2400/480', np.int64(2): '2405/481', np.int64(3): '2400/480', np.int64(4): '2405/481', np.int64(5): '2405/481', np.int64(6): '2405/481', np.int64(7): '2240/448', np.int64(8): '2395/479'}
+  dev4 {np.int64(0): '2400/480', np.int64(1): '2405/481', np.int64(2): '2405/481', np.int64(3): '2395/479', np.int64(4): '2400/480', np.int64(5): '2400/480', np.int64(6): '2355/471', np.int64(7): '2400/480', np.int64(8): '2390/478'}
+  dev5 {np.int64(0): '2400/480', np.int64(1): '2195/439', np.int64(2): '2400/480', np.int64(3): '2405/481', np.int64(4): '2400/480', np.int64(5): '2390/478', np.int64(6): '2365/473', np.int64(7): '2270/454', np.int64(8): '2390/478'}
+  dev6 {np.int64(0): '2400/480', np.int64(1): '2400/480', np.int64(2): '2400/480', np.int64(3): '2400/480', np.int64(4): '2400/480', np.int64(5): '2400/480', np.int64(6): '2400/480', np.int64(7): '2400/480', np.int64(8): '2405/481'}
+  dev7 {np.int64(0): '2400/480', np.int64(1): '2400/229', np.int64(2): '2400/251', np.int64(3): '2390/478', np.int64(4): '2400/480', np.int64(5): '2405/481', np.int64(6): '2405/481', np.int64(7): '2390/478', np.int64(8): '2405/481'}
